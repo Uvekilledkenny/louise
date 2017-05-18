@@ -224,10 +224,13 @@
                         </field>
                     </fields>
                 </register>
-                <!-- BG0CNT -->
+                <!-- BGCNT -->
                 <register>
-                    <name>BG0CNT</name>
-                    <description>BG0 Control for Mode 0/1 only</description>
+                    <dim>4</dim>
+                    <dimIncrement>2</dimIncrement>
+                    <dimIndex>0,1,2,3</dimIndex>
+                    <name>BG[%s]CNT</name>
+                    <description>BG[%s] Control</description>
                     <addressOffset>0x8</addressOffset>
                     <size>16</size>
                     <access>read-write</access>
@@ -339,206 +342,129 @@
                         </field>
                     </fields>
                 </register>
-                <!-- BG1CNT -->
-                <register derivedFrom="BG0CNT">
-                    <name>BG1CNT</name>
-                    <description>BG1 Control for Mode 0/1 only</description>
-                    <addressOffset>0xA</addressOffset>
-                </register>
-                <!-- BG2CNT -->
-                <register derivedFrom="BG0CNT">
-                    <name>BG2CNT</name>
-                    <description>BG2 Control for Mode 0/1/2 only</description>
-                    <addressOffset>0xC</addressOffset>
-                </register>
-                <!-- BG3CNT -->
-                <register derivedFrom="BG0CNT">
-                    <name>BG3CNT</name>
-                    <description>BG3 Control for Mode 0/2 only</description>
-                    <addressOffset>0xE</addressOffset>
-                </register>
-                <!-- BG0HOFS -->
-                <register>
-                    <name>BG0HOFS</name>
-                    <description>This Background scrolling register are exclusively used in Text modes for all layers in BG Mode 0, and for the first two layers in BG mode 1.</description>
+                <!-- BGScroll -->
+                <cluster>
+                    <dim>4</dim>
+                    <dimIncrement>0x4</dimIncrement>
+                    <dimIndex>0,1,2,3</dimIndex>
+                    <name>BG%sOFS</name>
+                    <description>Set Background %s Offset</description>
                     <addressOffset>0x10</addressOffset>
-                    <size>16</size>
-                    <access>write-only</access>
-                    <fields>
-                        <field>
-                            <name>Offset</name>
-                            <description>Set the Horizontal Offset of this Background</description>
-                            <bitRange>[8:0]</bitRange>
-                            <access>write-only</access>
-                        </field>
-                    </fields>
-                </register>
-                <!-- BG0VOFS -->
-                <register>
-                    <name>BG0VOFS</name>
-                    <description>This Background scrolling register are exclusively used in Text modes for all layers in BG Mode 0, and for the first two layers in BG mode 1.</description>
-                    <addressOffset>0x12</addressOffset>
-                    <size>16</size>
-                    <access>write-only</access>
-                    <fields>
-                        <field>
-                            <name>Offset</name>
-                            <description>Set the Vertical Offset of this Background</description>
-                            <bitRange>[8:0]</bitRange>
-                            <access>write-only</access>
-                        </field>
-                    </fields>
-                </register>
-                <!-- BG1HOFS -->
-                <register derivedFrom="BG0HOFS">
-                    <name>BG1HOFS</name>
-                    <description>This Background scrolling register are exclusively used in Text modes for all layers in BG Mode 0, and for the first two layers in BG mode 1.</description>
-                    <addressOffset>0x14</addressOffset>
-                </register>
-                <!-- BG1VOFS -->
-                <register derivedFrom="BG0VOFS">
-                    <name>BG1VOFS</name>
-                    <description>This Background scrolling register are exclusively used in Text modes for all layers in BG Mode 0, and for the first two layers in BG mode 1.</description>
-                    <addressOffset>0x16</addressOffset>
-                </register>
-                <!-- BG2HOFS -->
-                <register derivedFrom="BG0HOFS">
-                    <name>BG2HOFS</name>
-                    <description>This Background scrolling register are exclusively used in Text modes for all layers in BG Mode 0, and for the first two layers in BG mode 1.</description>
-                    <addressOffset>0x18</addressOffset>
-                </register>
-                <!-- BG2VOFS -->
-                <register derivedFrom="BG0VOFS">
-                    <name>BG2VOFS</name>
-                    <description>This Background scrolling register are exclusively used in Text modes for all layers in BG Mode 0, and for the first two layers in BG mode 1.</description>
-                    <addressOffset>0x1A</addressOffset>
-                </register>
-                <!-- BG3HOFS -->
-                <register derivedFrom="BG0HOFS">
-                    <name>BG3HOFS</name>
-                    <description>This Background scrolling register are exclusively used in Text modes for all layers in BG Mode 0, and for the first two layers in BG mode 1.</description>
-                    <addressOffset>0x1C</addressOffset>
-                </register>
-                <!-- BG3VOFS -->
-                <register derivedFrom="BG0VOFS">
-                    <name>BG3VOFS</name>
-                    <description>This Background scrolling register are exclusively used in Text modes for all layers in BG Mode 0, and for the first two layers in BG mode 1.</description>
-                    <addressOffset>0x1E</addressOffset>
-                </register>
-                <!-- BG2PA -->
-                <register>
-                    <name>BG2PA</name>
-                    <description>BG2 Rotation/Scaling Parameter A (alias dx)</description>
+                    <register>
+                        <name>H</name>
+                        <description>Horizontal Offset</description>
+                        <addressOffset>0x0</addressOffset>
+                        <size>16</size>
+                        <access>write-only</access>
+                        <fields>
+                            <field>
+                                <name>Offset</name>
+                                <description>Set the Horizontal Offset of this Background</description>
+                                <bitRange>[8:0]</bitRange>
+                                <access>write-only</access>
+                            </field>
+                        </fields>
+                    </register>
+                    <register>
+                        <name>V</name>
+                        <description>Vertical Offset</description>
+                        <addressOffset>0x2</addressOffset>
+                        <size>16</size>
+                        <access>write-only</access>
+                        <fields>
+                            <field>
+                                <name>Offset</name>
+                                <description>Set the Vertical Offset of this Background</description>
+                                <bitRange>[8:0]</bitRange>
+                                <access>write-only</access>
+                            </field>
+                        </fields>
+                    </register>
+                </cluster>
+                <!-- BG Rotation Scaling -->
+                <cluster>
+                    <dim>2</dim>
+                    <dimIncrement>0x10</dimIncrement>
+                    <dimIndex>2,3</dimIndex>
+                    <name>BG%sROTSCAL</name>
+                    <description>Set Background %s Offset</description>
                     <addressOffset>0x20</addressOffset>
-                    <size>16</size>
-                    <access>write-only</access>
-                    <fields>
-                        <field>
-                            <name>FractionalPortion</name>
-                            <bitRange>[7:0]</bitRange>
-                            <access>write-only</access>
-                        </field>
-                        <field>
-                            <name>IntegerPortion</name>
-                            <bitRange>[14:8]</bitRange>
-                            <access>write-only</access>
-                        </field>
-                        <field>
-                            <name>Sign</name>
-                            <bitRange>[15:15]</bitRange>
-                            <access>write-only</access>
-                        </field>
-                    </fields>
-                </register>
-                <!-- BG2PB -->
-                <register derivedFrom="BG2PA">
-                    <name>BG2PB</name>
-                    <description>BG2 Rotation/Scaling Parameter B (alias dmx)</description>
-                    <addressOffset>0x22</addressOffset>
-                </register>
-                <!-- BG2PC -->
-                <register derivedFrom="BG2PA">
-                    <name>BG2PC</name>
-                    <description>BG2 Rotation/Scaling Parameter C (alias dy)</description>
-                    <addressOffset>0x24</addressOffset>
-                </register>
-                <!-- BG2PD -->
-                <register derivedFrom="BG2PA">
-                    <name>BG2PD</name>
-                    <description>BG2 Rotation/Scaling Parameter D (alias dmy)</description>
-                    <addressOffset>0x26</addressOffset>
-                </register>
-                <!-- BG2PX -->
+                    <register>
+                        <name>PA</name>
+                        <description>BG Rotation/Scaling Parameter A (alias dx)</description>
+                        <addressOffset>0x0</addressOffset>
+                        <size>16</size>
+                        <access>write-only</access>
+                        <fields>
+                            <field>
+                                <name>FractionalPortion</name>
+                                <bitRange>[7:0]</bitRange>
+                                <access>write-only</access>
+                            </field>
+                            <field>
+                                <name>IntegerPortion</name>
+                                <bitRange>[14:8]</bitRange>
+                                <access>write-only</access>
+                            </field>
+                            <field>
+                                <name>Sign</name>
+                                <bitRange>[15:15]</bitRange>
+                                <access>write-only</access>
+                            </field>
+                        </fields>
+                    </register>
+                    <register derivedFrom="PA">
+                        <name>PB</name>
+                        <description>BG Rotation/Scaling Parameter B (alias dmx)</description>
+                        <addressOffset>0x2</addressOffset>
+                    </register>
+                    <register derivedFrom="PA">
+                        <name>PC</name>
+                        <description>BG Rotation/Scaling Parameter C (alias dy)</description>
+                        <addressOffset>0x4</addressOffset>
+                    </register>
+                    <register derivedFrom="PA">
+                        <name>PD</name>
+                        <description>BG Rotation/Scaling Parameter D (alias dmy)</description>
+                        <addressOffset>0x6</addressOffset>
+                    </register>
+                    <register>
+                        <name>X</name>
+                        <description>BG Reference Point X-Coordinate</description>
+                        <addressOffset>0x8</addressOffset>
+                        <size>32</size>
+                        <access>write-only</access>
+                        <fields>
+                            <field>
+                                <name>FractionalPortion</name>
+                                <bitRange>[7:0]</bitRange>
+                                <access>write-only</access>
+                            </field>
+                            <field>
+                                <name>IntegerPortion</name>
+                                <bitRange>[26:8]</bitRange>
+                                <access>write-only</access>
+                            </field>
+                            <field>
+                                <name>Sign</name>
+                                <bitRange>[27:27]</bitRange>
+                                <access>write-only</access>
+                            </field>
+                        </fields>
+                    </register>
+                    <register derivedFrom="X">
+                        <name>Y</name>
+                        <addressOffset>0xC</addressOffset>
+                        <description>BG Reference Point X-Coordinate</description>
+                    </register>
+                </cluster>
+                <!-- WINH -->
                 <register>
-                    <name>BG2PX</name>
-                    <description>BG2 Reference Point X-Coordinate</description>
-                    <addressOffset>0x28</addressOffset>
-                    <size>32</size>
-                    <access>write-only</access>
-                    <fields>
-                        <field>
-                            <name>FractionalPortion</name>
-                            <bitRange>[7:0]</bitRange>
-                            <access>write-only</access>
-                        </field>
-                        <field>
-                            <name>IntegerPortion</name>
-                            <bitRange>[26:8]</bitRange>
-                            <access>write-only</access>
-                        </field>
-                        <field>
-                            <name>Sign</name>
-                            <bitRange>[27:27]</bitRange>
-                            <access>write-only</access>
-                        </field>
-                    </fields>
-                </register>
-                <!-- BG2PY -->
-                <register derivedFrom="BG2PX">
-                    <name>BG2PY</name>
-                    <description>BG2 Reference Point Y-Coordinate</description>
-                    <addressOffset>0x2C</addressOffset>
-                </register>
-                <!-- BG3PA -->
-                <register derivedFrom="BG2PA">
-                    <name>BG3PA</name>
-                    <description>BG3 Rotation/Scaling Parameter A (dx)</description>
-                    <addressOffset>0x30</addressOffset>
-                </register>
-                <!-- BG3PB -->
-                <register derivedFrom="BG2PA">
-                    <name>BG3PB</name>
-                    <description>BG3 Rotation/Scaling Parameter B (dmx)</description>
-                    <addressOffset>0x32</addressOffset>
-                </register>
-                <!-- BG3PC -->
-                <register derivedFrom="BG2PA">
-                    <name>BG3PC</name>
-                    <description>BG3 Rotation/Scaling Parameter C (dy)</description>
-                    <addressOffset>0x34</addressOffset>
-                </register>
-                <!-- BG3PD -->
-                <register derivedFrom="BG2PA">
-                    <name>BG3PD</name>
-                    <description>BG3 Rotation/Scaling Parameter D (dmy)</description>
-                    <addressOffset>0x36</addressOffset>
-                </register>
-                <!-- BG3PX -->
-                <register derivedFrom="BG2PX">
-                    <name>BG3PX</name>
-                    <description>BG3 Reference Point X-Coordinate</description>
-                    <addressOffset>0x38</addressOffset>
-                </register>
-                <!-- BG3PY -->
-                <register derivedFrom="BG2PX">
-                    <name>BG3PY</name>
-                    <description>BG3 Reference Point Y-Coordinate</description>
-                    <addressOffset>0x3C</addressOffset>
-                </register>
-                <!-- WIN0H -->
-                <register>
-                    <name>WIN0H</name>
-                    <description>Window 0 Horizontal Dimensions</description>
+                    <dim>2</dim>
+                    <dimIncrement>2</dimIncrement>
+                    <dimIndex>0,1</dimIndex>
+                    <name>WIN%sH</name>
+                    <description>Window %s Horizontal Dimensions</description>
                     <addressOffset>0x40</addressOffset>
                     <size>16</size>
                     <access>write-only</access>
@@ -557,16 +483,13 @@
                         </field>
                     </fields>
                 </register>
-                <!-- WIN1H -->
-                <register derivedFrom="WIN0H">
-                    <name>WIN1H</name>
-                    <description>Window 1 Horizontal Dimensions</description>
-                    <addressOffset>0x42</addressOffset>
-                </register>
-                <!-- WIN0V -->
+                <!-- WINV -->
                 <register>
-                    <name>WIN0V</name>
-                    <description>Window 0 Vertical Dimensions</description>
+                    <dim>2</dim>
+                    <dimIncrement>2</dimIncrement>
+                    <dimIndex>0,1</dimIndex>
+                    <name>WIN%sV</name>
+                    <description>Window %s Vertical Dimensions</description>
                     <addressOffset>0x44</addressOffset>
                     <size>16</size>
                     <access>write-only</access>
@@ -584,12 +507,6 @@
                             <access>write-only</access>
                         </field>
                     </fields>
-                </register>
-                <!-- WIN1V -->
-                <register derivedFrom="WIN0V">
-                    <name>WIN1V</name>
-                    <description>Window 1 Vertical Dimensions</description>
-                    <addressOffset>0x46</addressOffset>
                 </register>
                 <!-- WININ -->
                 <register>
@@ -1625,10 +1542,13 @@
                     <size>32</size>
                     <access>read-write</access>
                 </register>
-                <!-- FIFO_A -->
+                <!-- FIFO -->
                 <register>
-                    <name>FIFO_A</name>
-                    <description>Sound A FIFO</description>
+                    <dim>2</dim>
+                    <dimIncrement>4</dimIncrement>
+                    <dimIndex>A,B</dimIndex>
+                    <name>FIFO_%s</name>
+                    <description>Sound [%s] FIFO</description>
                     <addressOffset>0x40</addressOffset>
                     <size>32</size>
                     <access>write-only</access>
@@ -1654,12 +1574,6 @@
                             <access>write-only</access>
                         </field>
                     </fields>
-                </register>
-                <!-- FIFO_B -->
-                <register derivedFrom="FIFO_A">
-                    <name>FIFO_B</name>
-                    <description>Sound B FIFO</description>
-                    <addressOffset>0x44</addressOffset>
                 </register>
             </registers>
         </peripheral>
