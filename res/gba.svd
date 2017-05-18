@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <device schemaVersion="1.1" 
     xmlns:xs="http://www.w3.org/2001/XMLSchema-instance" xs:noNamespaceSchemaLocation="CMSIS-SVD.xsd">
-    <name>Game Boy Advance</name>
+    <name>GBA</name>
     <version>0.5</version>
     <description>Game Boy Advance SVD File for my Louise library </description>
     <addressUnitBits>8</addressUnitBits>
@@ -259,7 +259,6 @@
                         </field>
                         <field>
                             <name>Mosaic</name>
-                            <description></description>
                             <bitRange>[6:6]</bitRange>
                             <access>read-write</access>
                         </field>
@@ -431,19 +430,16 @@
                     <fields>
                         <field>
                             <name>FractionalPortion</name>
-                            <description></description>
                             <bitRange>[7:0]</bitRange>
                             <access>write-only</access>
                         </field>
                         <field>
                             <name>IntegerPortion</name>
-                            <description></description>
                             <bitRange>[14:8]</bitRange>
                             <access>write-only</access>
                         </field>
                         <field>
                             <name>Sign</name>
-                            <description></description>
                             <bitRange>[15:15]</bitRange>
                             <access>write-only</access>
                         </field>
@@ -477,19 +473,16 @@
                     <fields>
                         <field>
                             <name>FractionalPortion</name>
-                            <description></description>
                             <bitRange>[7:0]</bitRange>
                             <access>write-only</access>
                         </field>
                         <field>
                             <name>IntegerPortion</name>
-                            <description></description>
                             <bitRange>[26:8]</bitRange>
                             <access>write-only</access>
                         </field>
                         <field>
                             <name>Sign</name>
-                            <description></description>
                             <bitRange>[27:27]</bitRange>
                             <access>write-only</access>
                         </field>
@@ -1668,26 +1661,28 @@
             <registers>
                 <cluster>
                     <dim>4</dim>
-                    <dimIncrement>4</dimIncrement>
+                    <dimIncrement>0x12</dimIncrement>
                     <dimIndex>0,1,2,3</dimIndex>
+                    <name>DMA[%s]</name>
+                    <description>DMA [%s] Transfer Channel </description>
                     <addressOffset>0x0</addressOffset>
                     <register>
-                        <name>DMA[%s]SAD</name>
-                        <description>DMA [%s] Source Address</description>
+                        <name>SAD</name>
+                        <description>DMA Source Address</description>
                         <addressOffset>0x0</addressOffset>
                         <size>32</size>
                         <access>write-only</access>
                     </register>
                     <register>
-                        <name>DMA[%s]DAD</name>
-                        <description>DMA [%s] Destination Address</description>
+                        <name>DAD</name>
+                        <description>DMA Destination Address</description>
                         <addressOffset>0x4</addressOffset>
                         <size>32</size>
                         <access>write-only</access>
                     </register>
                     <register>
-                        <name>DMA[%s]CNT</name>
-                        <description>DMA [%s] Control</description>
+                        <name>CNT</name>
+                        <description>DMA Control</description>
                         <addressOffset>0x8</addressOffset>
                         <size>32</size>
                         <access>read-write</access>
@@ -1816,7 +1811,7 @@
                     <dim>4</dim>
                     <dimIncrement>4</dimIncrement>
                     <dimIndex>0,1,2,3</dimIndex>
-                    <name>TM[%s]CNT</name>
+                    <name>TM%sCNT</name>
                     <addressOffset>0x0</addressOffset>
                     <size>32</size>
                     <access>read-write</access>
