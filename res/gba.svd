@@ -12,6 +12,11 @@
             <name>LCD</name>
             <description>LCD I/O Registers</description>
             <baseAddress>0x4000000</baseAddress>
+            <addressBlock>
+                <offset>0</offset>
+                <size>0x56</size>
+                <usage>registers</usage>
+            </addressBlock>
             <registers>
                 <!-- DISPCNT -->
                 <register>
@@ -307,7 +312,7 @@
                         <field>
                             <name>ScreenSize</name>
                             <description>Sets the Screen Size</description>
-                            <bitRange>[14:15]</bitRange>
+                            <bitRange>[15:14]</bitRange>
                             <access>read-write</access>
                             <enumeratedValues>
                                 <enumeratedValue>
@@ -671,7 +676,7 @@
                 <!-- WINOUT -->
                 <register>
                     <name>WINOUT</name>
-                    <description>Control of Outside of Windows & Inside of OBJ Window</description>
+                    <description>Control of Outside of Windows And Inside of OBJ Window</description>
                     <addressOffset>0x4A</addressOffset>
                     <size>16</size>
                     <access>read-write</access>
@@ -765,7 +770,7 @@
                             <access>write-only</access>
                         </field>
                         <field>
-                            <name>BGMosaicHSize</name>
+                            <name>BGMosaicVSize</name>
                             <description>BG Mosaic V-Size (minus 1)</description>
                             <bitRange>[7:4]</bitRange>
                             <access>write-only</access>
@@ -939,6 +944,11 @@
             <name>Sound</name>
             <description>GBA Sound Controller</description>
             <baseAddress>0x4000060</baseAddress>
+            <addressBlock>
+                <offset>0</offset>
+                <size>0x48</size>
+                <usage>registers</usage>
+            </addressBlock>
             <registers>
                 <!-- SOUND1CNT_L -->
                 <register>
@@ -1658,6 +1668,11 @@
             <name>DMA</name>
             <description>DMA Transfer Channels</description>
             <baseAddress>0x40000B0</baseAddress>
+            <addressBlock>
+                <offset>0</offset>
+                <size>0x30</size>
+                <usage>registers</usage>
+            </addressBlock>
             <registers>
                 <cluster>
                     <dim>4</dim>
@@ -1806,12 +1821,18 @@
             <name>Timer</name>
             <description>Timers registers</description>
             <baseAddress>0x4000100</baseAddress>
+            <addressBlock>
+                <offset>0</offset>
+                <size>0x10</size>
+                <usage>registers</usage>
+            </addressBlock>
             <registers>
                 <register>
                     <dim>4</dim>
                     <dimIncrement>4</dimIncrement>
                     <dimIndex>0,1,2,3</dimIndex>
                     <name>TM%sCNT</name>
+                    <description>Timer %s Counter/Reload and Control</description>
                     <addressOffset>0x0</addressOffset>
                     <size>32</size>
                     <access>read-write</access>
@@ -1873,6 +1894,11 @@
             <name>Inputs</name>
             <description>Keypad Input</description>
             <baseAddress>0x4000130</baseAddress>
+            <addressBlock>
+                <offset>0</offset>
+                <size>0x4</size>
+                <usage>registers</usage>
+            </addressBlock>
             <registers>
                 <!-- KEYINPUT -->
                 <register>
@@ -2055,6 +2081,11 @@
             <name>Interrupt</name>
             <description>Interrupt, Waitstate, and Power-Down Control</description>
             <baseAddress>0x4000200</baseAddress>
+            <addressBlock>
+                <offset>0</offset>
+                <size>0xA</size>
+                <usage>registers</usage>
+            </addressBlock>
             <registers>
                 <!-- IE -->
                 <register>
