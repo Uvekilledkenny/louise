@@ -6,6 +6,8 @@
     <description>Game Boy Advance SVD File for my Louise library </description>
     <addressUnitBits>8</addressUnitBits>
     <width>32</width>
+    <resetValue>0x0</resetValue>
+    <resetMask>0xFFFFFFFF</resetMask>
     <peripherals>
         <!-- LCD -->
         <peripheral>
@@ -229,8 +231,8 @@
                     <dim>4</dim>
                     <dimIncrement>2</dimIncrement>
                     <dimIndex>0,1,2,3</dimIndex>
-                    <name>BG[%s]CNT</name>
-                    <description>BG[%s] Control</description>
+                    <name>BG%sCNT</name>
+                    <description>BG%s Control</description>
                     <addressOffset>0x8</addressOffset>
                     <size>16</size>
                     <access>read-write</access>
@@ -454,8 +456,8 @@
                     </register>
                     <register derivedFrom="X">
                         <name>Y</name>
+                        <description>BG Reference Point Y-Coordinate</description>
                         <addressOffset>0xC</addressOffset>
-                        <description>BG Reference Point X-Coordinate</description>
                     </register>
                 </cluster>
                 <!-- WINH -->
@@ -1010,12 +1012,14 @@
                     <name>SOUND2CNT_L</name>
                     <description>Channel 2 Duty/Length/Envelope</description>
                     <addressOffset>0x8</addressOffset>
+                    <size>16</size>
                 </register>
                 <!-- SOUND2CNT_H -->
                 <register derivedFrom="SOUND1CNT_X">
                     <name>SOUND2CNT_H</name>
                     <description>Channel 2 Frequency/Control</description>
                     <addressOffset>0xC</addressOffset>
+                    <size>16</size>
                 </register>
                 <!-- SOUND3CNT_L -->
                 <register>
@@ -1536,7 +1540,7 @@
                     <dim>4</dim>
                     <dimIncrement>4</dimIncrement>
                     <dimIndex>0,1,2,3</dimIndex>
-                    <name>WAVE_RAM[%s]</name>
+                    <name>WAVE_RAM%s</name>
                     <description>This area contains 16 bytes (32 x 4bits) Wave Pattern data which is output by channel 3.</description>
                     <addressOffset>0x30</addressOffset>
                     <size>32</size>
@@ -1798,6 +1802,656 @@
                             <description>Timer Start/Stop (0=Stop, 1=Operate)</description>
                             <bitRange>[23:23]</bitRange>
                             <access>read-write</access>
+                        </field>
+                    </fields>
+                </register>
+            </registers>
+        </peripheral>
+        <!-- Serial Communication -->
+        <peripheral>
+            <name>SerialCommunication</name>
+            <description>GBA Communication Ports</description>
+            <baseAddress>0x4000120</baseAddress>
+            <addressBlock>
+                <offset>0</offset>
+                <size>0x3A</size>
+                <usage>registers</usage>
+            </addressBlock>
+            <registers>
+                <!-- SIOMULTI0 => SIOMULTI3 -->
+                <register>
+                    <dim>4</dim>
+                    <dimIncrement>2</dimIncrement>
+                    <dimIndex>0,1,2,3</dimIndex>
+                    <name>SIOMULTI%s</name>
+                    <description>These registers are automatically reset to FFFFh upon transfer start.After transfer, these registers contain incoming data (16bit each) from all remote GBAs (if any / otherwise still FFFFh), as well as the local outgoing SIOMLT_SEND data.Ie. after the transfer, all connected GBAs will contain the same values in their SIOMULTI0-3 registers.</description>
+                    <addressOffset>0x0</addressOffset>
+                    <size>16</size>
+                    <access>read-write</access>
+                </register>
+                <!-- SIODATA32 -->
+                <register>
+                    <name>SIODATA32</name>
+                    <description>Same as SIODATA8, for 32bit normal transfer mode respectively.</description>
+                    <alternateRegister>SIOMULTI0</alternateRegister>
+                    <addressOffset>0x0</addressOffset>
+                    <size>32</size>
+                    <access>read-write</access>
+                </register>
+                <!-- SIOCNT_NORMAL -->
+                <register>
+                    <name>SIOCNT_NORMAL</name>
+                    <description>SIO Control, usage in NORMAL Mode</description>
+                    <addressOffset>0x8</addressOffset>
+                    <size>16</size>
+                    <access>read-write</access>
+                    <fields>
+                        <field>
+                            <name>SC</name>
+                            <description>Shift Clock (SC)</description>
+                            <bitRange>[0:0]</bitRange>
+                            <access>read-write</access>
+                            <enumeratedValues>
+                                <enumeratedValue>
+                                    <name>External</name>
+                                    <value>0</value>
+                                </enumeratedValue>
+                                <enumeratedValue>
+                                    <name>Internal</name>
+                                    <value>1</value>
+                                </enumeratedValue>
+                            </enumeratedValues>
+                        </field>
+                        <field>
+                            <name>InternalSC</name>
+                            <description>Internal Shift Clock</description>
+                            <bitRange>[1:1]</bitRange>
+                            <access>read-write</access>
+                            <enumeratedValues>
+                                <enumeratedValue>
+                                    <name>Low</name>
+                                    <description>256KHz</description>
+                                    <value>0</value>
+                                </enumeratedValue>
+                                <enumeratedValue>
+                                    <name>High</name>
+                                    <description>2MHz</description>
+                                    <value>1</value>
+                                </enumeratedValue>
+                            </enumeratedValues>
+                        </field>
+                        <field>
+                            <name>SI</name>
+                            <description>SI State (opponents SO)</description>
+                            <bitRange>[2:2]</bitRange>
+                            <access>read-only</access>
+                            <enumeratedValues>
+                                <enumeratedValue>
+                                    <name>Low</name>
+                                    <value>0</value>
+                                </enumeratedValue>
+                                <enumeratedValue>
+                                    <name>High_None</name>
+                                    <value>1</value>
+                                </enumeratedValue>
+                            </enumeratedValues>
+                        </field>
+                        <field>
+                            <name>SO</name>
+                            <description>SO during inactivity applied ONLY when Start is 0</description>
+                            <bitRange>[3:3]</bitRange>
+                            <access>read-write</access>
+                            <enumeratedValues>
+                                <enumeratedValue>
+                                    <name>Low</name>
+                                    <value>0</value>
+                                </enumeratedValue>
+                                <enumeratedValue>
+                                    <name>High</name>
+                                    <value>1</value>
+                                </enumeratedValue>
+                            </enumeratedValues>
+                        </field>
+                        <field>
+                            <name>Start</name>
+                            <description>Start Bit</description>
+                            <bitRange>[7:7]</bitRange>
+                            <access>read-write</access>
+                            <enumeratedValues>
+                                <enumeratedValue>
+                                    <name>Inactive_Ready</name>
+                                    <value>0</value>
+                                </enumeratedValue>
+                                <enumeratedValue>
+                                    <name>Start_Active</name>
+                                    <value>1</value>
+                                </enumeratedValue>
+                            </enumeratedValues>
+                        </field>
+                        <field>
+                            <name>Length</name>
+                            <description>Transfer Length</description>
+                            <bitRange>[12:12]</bitRange>
+                            <access>read-write</access>
+                            <enumeratedValues>
+                                <enumeratedValue>
+                                    <name>Data8</name>
+                                    <value>0</value>
+                                </enumeratedValue>
+                                <enumeratedValue>
+                                    <name>Data32</name>
+                                    <value>1</value>
+                                </enumeratedValue>
+                            </enumeratedValues>
+                        </field>
+                        <field>
+                            <name>IRQ</name>
+                            <description>IRQ Enable</description>
+                            <bitRange>[14:14]</bitRange>
+                            <access>read-write</access>
+                            <enumeratedValues>
+                                <enumeratedValue>
+                                    <name>Disable</name>
+                                    <value>0</value>
+                                </enumeratedValue>
+                                <enumeratedValue>
+                                    <name>Enable</name>
+                                    <description>Enables IRQ upon completion</description>
+                                    <value>1</value>
+                                </enumeratedValue>
+                            </enumeratedValues>
+                        </field>
+                    </fields>
+                </register>
+                <!-- SIOCNT_MULTI -->
+                <register>
+                    <name>SIOCNT_MULTI</name>
+                    <description>SIO Control, usage in NORMAL Mode</description>
+                    <alternateRegister>SIOCNT_NORMAL</alternateRegister>
+                    <addressOffset>0x8</addressOffset>
+                    <size>16</size>
+                    <access>read-write</access>
+                    <resetValue>0x2000</resetValue>
+                    <fields>
+                        <field>
+                            <name>Rate</name>
+                            <description>Baud Rate</description>
+                            <bitRange>[1:0]</bitRange>
+                            <access>read-write</access>
+                            <enumeratedValues>
+                                <enumeratedValue>
+                                    <name>r9600</name>
+                                    <value>0</value>
+                                </enumeratedValue>
+                                <enumeratedValue>
+                                    <name>r38400</name>
+                                    <value>1</value>
+                                </enumeratedValue>
+                                <enumeratedValue>
+                                    <name>r57600</name>
+                                    <value>2</value>
+                                </enumeratedValue>
+                                <enumeratedValue>
+                                    <name>r115200</name>
+                                    <value>3</value>
+                                </enumeratedValue>
+                            </enumeratedValues>
+                        </field>
+                        <field>
+                            <name>SI</name>
+                            <description>SI-Terminal</description>
+                            <bitRange>[2:2]</bitRange>
+                            <access>read-only</access>
+                            <enumeratedValues>
+                                <enumeratedValue>
+                                    <name>Parent</name>
+                                    <value>0</value>
+                                </enumeratedValue>
+                                <enumeratedValue>
+                                    <name>Child</name>
+                                    <value>1</value>
+                                </enumeratedValue>
+                            </enumeratedValues>
+                        </field>
+                        <field>
+                            <name>SD</name>
+                            <description>SD-Terminal</description>
+                            <bitRange>[3:3]</bitRange>
+                            <access>read-only</access>
+                            <enumeratedValues>
+                                <enumeratedValue>
+                                    <name>None</name>
+                                    <description>Bad connection</description>
+                                    <value>0</value>
+                                </enumeratedValue>
+                                <enumeratedValue>
+                                    <name>Some</name>
+                                    <description>All GBAs Ready</description>
+                                    <value>1</value>
+                                </enumeratedValue>
+                            </enumeratedValues>
+                        </field>
+                        <field>
+                            <name>ID</name>
+                            <description>Multi-Player ID</description>
+                            <bitRange>[5:4]</bitRange>
+                            <access>read-only</access>
+                            <enumeratedValues>
+                                <enumeratedValue>
+                                    <name>Parent</name>
+                                    <value>0</value>
+                                </enumeratedValue>
+                                <enumeratedValue>
+                                    <name>Child1</name>
+                                    <value>1</value>
+                                </enumeratedValue>
+                                <enumeratedValue>
+                                    <name>Child2</name>
+                                    <value>2</value>
+                                </enumeratedValue>
+                                <enumeratedValue>
+                                    <name>Child3</name>
+                                    <value>3</value>
+                                </enumeratedValue>
+                            </enumeratedValues>
+                        </field>
+                        <field>
+                            <name>Error</name>
+                            <description>Multi-Player Error</description>
+                            <bitRange>[6:6]</bitRange>
+                            <access>read-only</access>
+                            <enumeratedValues>
+                                <enumeratedValue>
+                                    <name>None</name>
+                                    <value>0</value>
+                                </enumeratedValue>
+                                <enumeratedValue>
+                                    <name>Error</name>
+                                    <value>1</value>
+                                </enumeratedValue>
+                            </enumeratedValues>
+                        </field>
+                        <field>
+                            <name>Start_Busy</name>
+                            <description>Start Busy Bit, read only for slaves</description>
+                            <bitRange>[7:7]</bitRange>
+                            <access>read-write</access>
+                            <enumeratedValues>
+                                <enumeratedValue>
+                                    <name>Inactive</name>
+                                    <value>0</value>
+                                </enumeratedValue>
+                                <enumeratedValue>
+                                    <name>Start_Busy</name>
+                                    <value>1</value>
+                                </enumeratedValue>
+                            </enumeratedValues>
+                        </field>
+                        <field>
+                            <name>IRQ</name>
+                            <description>IRQ Enable</description>
+                            <bitRange>[14:14]</bitRange>
+                            <access>read-write</access>
+                            <enumeratedValues>
+                                <enumeratedValue>
+                                    <name>Disable</name>
+                                    <value>0</value>
+                                </enumeratedValue>
+                                <enumeratedValue>
+                                    <name>Enable</name>
+                                    <description>Enables IRQ upon completion</description>
+                                    <value>1</value>
+                                </enumeratedValue>
+                            </enumeratedValues>
+                        </field>
+                    </fields>
+                </register>
+                <!-- SCCNT_L -->
+                <register>
+                    <name>SCCNT_L</name>
+                    <description>SIO Control, usage in UART Mode</description>
+                    <alternateRegister>SIOCNT_NORMAL</alternateRegister>
+                    <addressOffset>0x8</addressOffset>
+                    <size>16</size>
+                    <access>read-write</access>
+                    <resetValue>0x3000</resetValue>
+                    <fields>
+                        <field>
+                            <name>Rate</name>
+                            <description>Baud Rate</description>
+                            <bitRange>[1:0]</bitRange>
+                            <access>read-write</access>
+                            <enumeratedValues>
+                                <enumeratedValue>
+                                    <name>r9600</name>
+                                    <value>0</value>
+                                </enumeratedValue>
+                                <enumeratedValue>
+                                    <name>r38400</name>
+                                    <value>1</value>
+                                </enumeratedValue>
+                                <enumeratedValue>
+                                    <name>r57600</name>
+                                    <value>2</value>
+                                </enumeratedValue>
+                                <enumeratedValue>
+                                    <name>r115200</name>
+                                    <value>3</value>
+                                </enumeratedValue>
+                            </enumeratedValues>
+                        </field>
+                        <field>
+                            <name>CTS</name>
+                            <description>CTS Flag</description>
+                            <bitRange>[2:2]</bitRange>
+                            <access>read-write</access>
+                            <enumeratedValues>
+                                <enumeratedValue>
+                                    <name>Blind</name>
+                                    <description>Send always/blindly</description>
+                                    <value>0</value>
+                                </enumeratedValue>
+                                <enumeratedValue>
+                                    <name>Restricted</name>
+                                    <description>Send only when SC=LOW</description>
+                                    <value>1</value>
+                                </enumeratedValue>
+                            </enumeratedValues>
+                        </field>
+                        <field>
+                            <name>Parity</name>
+                            <description>Parity Control</description>
+                            <bitRange>[3:3]</bitRange>
+                            <access>read-write</access>
+                            <enumeratedValues>
+                                <enumeratedValue>
+                                    <name>Even</name>
+                                    <value>0</value>
+                                </enumeratedValue>
+                                <enumeratedValue>
+                                    <name>Odd</name>
+                                    <value>1</value>
+                                </enumeratedValue>
+                            </enumeratedValues>
+                        </field>
+                        <field>
+                            <name>SendData</name>
+                            <description>Send Data Flag</description>
+                            <bitRange>[4:4]</bitRange>
+                            <access>read-only</access>
+                            <enumeratedValues>
+                                <enumeratedValue>
+                                    <name>NotFull</name>
+                                    <value>0</value>
+                                </enumeratedValue>
+                                <enumeratedValue>
+                                    <name>Full</name>
+                                    <value>1</value>
+                                </enumeratedValue>
+                            </enumeratedValues>
+                        </field>
+                        <field>
+                            <name>RecieveData</name>
+                            <description>Revieve Data Flag</description>
+                            <bitRange>[5:5]</bitRange>
+                            <access>read-only</access>
+                            <enumeratedValues>
+                                <enumeratedValue>
+                                    <name>NotEmpty</name>
+                                    <value>0</value>
+                                </enumeratedValue>
+                                <enumeratedValue>
+                                    <name>Empty</name>
+                                    <value>1</value>
+                                </enumeratedValue>
+                            </enumeratedValues>
+                        </field>
+                        <field>
+                            <name>Error</name>
+                            <description>Error Flag</description>
+                            <bitRange>[6:6]</bitRange>
+                            <access>read-only</access>
+                            <enumeratedValues>
+                                <enumeratedValue>
+                                    <name>None</name>
+                                    <value>0</value>
+                                </enumeratedValue>
+                                <enumeratedValue>
+                                    <name>Some</name>
+                                    <value>1</value>
+                                </enumeratedValue>
+                            </enumeratedValues>
+                        </field>
+                        <field>
+                            <name>Length</name>
+                            <description>Data Length</description>
+                            <bitRange>[7:7]</bitRange>
+                            <access>read-write</access>
+                            <enumeratedValues>
+                                <enumeratedValue>
+                                    <name>Data7</name>
+                                    <description>7bits</description>
+                                    <value>0</value>
+                                </enumeratedValue>
+                                <enumeratedValue>
+                                    <name>Data8</name>
+                                    <description>8bits</description>
+                                    <value>1</value>
+                                </enumeratedValue>
+                            </enumeratedValues>
+                        </field>
+                        <field>
+                            <name>FIFOEnable</name>
+                            <description>FIFO Enable Flag</description>
+                            <bitRange>[8:8]</bitRange>
+                            <enumeratedValues>
+                                <enumeratedValue>
+                                    <name>Disable</name>
+                                    <value>0</value>
+                                </enumeratedValue>
+                                <enumeratedValue>
+                                    <name>Enable</name>
+                                    <value>1</value>
+                                </enumeratedValue>
+                            </enumeratedValues>
+                        </field>
+                        <field derivedFrom="FIFOEnable">
+                            <name>ParityEnable</name>
+                            <description>Parity Enable Flag</description>
+                            <bitRange>[9:9]</bitRange>
+                        </field>
+                        <field derivedFrom="FIFOEnable">
+                            <name>SendEnable</name>
+                            <description>Send Enable Flag</description>
+                            <bitRange>[10:10]</bitRange>
+                        </field>
+                        <field derivedFrom="FIFOEnable">
+                            <name>RecieveEnable</name>
+                            <description>Recieve Enable Flag</description>
+                            <bitRange>[11:11]</bitRange>
+                        </field>
+                        <field>
+                            <name>IRQ</name>
+                            <description>IRQ Enable</description>
+                            <bitRange>[14:14]</bitRange>
+                            <access>read-write</access>
+                            <enumeratedValues>
+                                <enumeratedValue>
+                                    <name>Disable</name>
+                                    <value>0</value>
+                                </enumeratedValue>
+                                <enumeratedValue>
+                                    <name>Enable</name>
+                                    <description>Enables IRQ upon completion</description>
+                                    <value>1</value>
+                                </enumeratedValue>
+                            </enumeratedValues>
+                        </field>
+                    </fields>
+                </register>
+                <!-- SIOMLT_SEND -->
+                <register>
+                    <name>SIOMLT_SEND</name>
+                    <description>Outgoing data (16 bit) which is to be sent to the other GBAs.</description>
+                    <addressOffset>0xA</addressOffset>
+                    <size>16</size>
+                    <access>read-write</access>
+                </register>
+                <!-- SIODATA8 -->
+                <register>
+                    <name>SIODATA8</name>
+                    <description>For 8bit normal mode. Contains 8bit data (only lower 8bit are used). Outgoing data should be written to this register before starting the transfer. During transfer, transmitted bits are shifted-out (MSB first), and received bits are shifted-in simultaneously. Upon transfer completion, the register contains the received 8bit value.</description>
+                    <alternateRegister>SIOMLT_SEND</alternateRegister>
+                    <addressOffset>0xA</addressOffset>
+                    <size>16</size>
+                    <access>read-write</access>
+                    <resetValue>0x0</resetValue>
+                </register>
+                <!-- RCNT -->
+                <register>
+                    <name>RCNT</name>
+                    <description>Mode Selection, in Normal/Multiplayer/UART modes</description>
+                    <addressOffset>0x14</addressOffset>
+                    <size>16</size>
+                    <access>read-write</access>
+                    <fields>
+                        <field>
+                            <name>SC</name>
+                            <description>Current SC State</description>
+                            <bitRange>[0:0]</bitRange>
+                            <access>read-only</access>
+                        </field>
+                        <field>
+                            <name>SD</name>
+                            <description>Current SD State</description>
+                            <bitRange>[1:1]</bitRange>
+                            <access>read-only</access>
+                        </field>
+                        <field>
+                            <name>SI</name>
+                            <description>Current SI State</description>
+                            <bitRange>[2:2]</bitRange>
+                            <access>read-only</access>
+                        </field>
+                        <field>
+                            <name>SO</name>
+                            <description>Current SO State</description>
+                            <bitRange>[3:3]</bitRange>
+                            <access>read-only</access>
+                        </field>
+                        <field>
+                            <name>JoybusMode</name>
+                            <description>Must be 1 if in Joybus Mode with StandardMode to 1 too</description>
+                            <bitRange>[14:14]</bitRange>
+                            <access>read-only</access>
+                            <enumeratedValues>
+                                <enumeratedValue>
+                                    <name>Disabled</name>
+                                    <value>0</value>
+                                </enumeratedValue>
+                                <enumeratedValue>
+                                    <name>Enabled</name>
+                                    <value>1</value>
+                                </enumeratedValue>
+                            </enumeratedValues>
+                        </field>
+                        <field>
+                            <name>StandardMode</name>
+                            <description>Check Serial Mode</description>
+                            <bitRange>[15:15]</bitRange>
+                            <access>read-only</access>
+                            <enumeratedValues>
+                                <enumeratedValue>
+                                    <name>Standard</name>
+                                    <value>0</value>
+                                </enumeratedValue>
+                                <enumeratedValue>
+                                    <name>Joybus</name>
+                                    <value>1</value>
+                                </enumeratedValue>
+                            </enumeratedValues>
+                        </field>
+                    </fields>
+                </register>
+                <!-- JOYCNT -->
+                <register>
+                    <name>JOYCNT</name>
+                    <description>JOY BUS Control Register</description>
+                    <addressOffset>0x20</addressOffset>
+                    <size>16</size>
+                    <access>read-write</access>
+                    <fields>
+                        <field>
+                            <name>DeviceReset</name>
+                            <description>Device Reset Flag (Command FFh) (Read/Acknowledge)</description>
+                            <bitRange>[0:0]</bitRange>
+                            <access>read-write</access>
+                        </field>
+                        <field>
+                            <name>RecieveComplete</name>
+                            <description>Receive Complete Flag (Command 14h or 15h?) (Read/Acknowledge)</description>
+                            <bitRange>[1:1]</bitRange>
+                            <access>read-write</access>
+                        </field>
+                        <field>
+                            <name>SendComplete</name>
+                            <description>Send Complete Flag (Command 15h or 14h?) (Read/Acknowledge)</description>
+                            <bitRange>[2:2]</bitRange>
+                            <access>read-write</access>
+                        </field>
+                        <field>
+                            <name>IRQEnable</name>
+                            <description>SIRQ when receiving a Device Reset Command</description>
+                            <bitRange>[6:6]</bitRange>
+                            <access>read-write</access>
+                            <enumeratedValues>
+                                <enumeratedValue>
+                                    <name>Disable</name>
+                                    <value>0</value>
+                                </enumeratedValue>
+                                <enumeratedValue>
+                                    <name>Enable</name>
+                                    <value>1</value>
+                                </enumeratedValue>
+                            </enumeratedValues>
+                        </field>
+                    </fields>
+                </register>
+                <!-- JOY_RECV -->
+                <register>
+                    <name>JOY_RECV</name>
+                    <description>Receive Data Register</description>
+                    <addressOffset>0x30</addressOffset>
+                    <size>32</size>
+                    <access>read-write</access>
+                </register>
+                <!-- JOY_TRANS -->
+                <register>
+                    <name>JOY_TRANS</name>
+                    <description>Transfer Data Register</description>
+                    <addressOffset>0x34</addressOffset>
+                    <size>32</size>
+                    <access>read-write</access>
+                </register>
+                <!-- JOYSTAT -->
+                <register>
+                    <name>JOYSTAT</name>
+                    <description>Receive Status Register</description>
+                    <addressOffset>0x38</addressOffset>
+                    <size>16</size>
+                    <access>read-only</access>
+                    <fields>
+                        <field>
+                            <name>ReceiveStatus</name>
+                            <description>Receive Status Flag (0=Remote GBA is/was receiving)</description>
+                            <bitRange>[1:1]</bitRange>
+                            <access>read-only</access>
+                        </field>
+                        <field>
+                            <name>SendStatus</name>
+                            <description>Send Status Flag (1=Remote GBA is/was sending)</description>
+                            <bitRange>[3:3]</bitRange>
+                            <access>read-only</access>
                         </field>
                     </fields>
                 </register>
@@ -2086,6 +2740,7 @@
                     <name>IF</name>
                     <description>Interrupt Request Flags / IRQ Acknowledge</description>
                     <addressOffset>0x2</addressOffset>
+                    <size>16</size>
                 </register>
                 <!-- WAITCNT -->
                 <register>

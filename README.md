@@ -5,12 +5,12 @@
 This crate is a low level library for the GBA.
 
 ## TODOs :
-- [x] SVD to Create for GBA
-- [ ] Check and Improve SVD File
+- [x] SVD to create for GBA
+- [x] Check and validates SVD File
 - [ ] Custom SVD Parser 
 - [ ] Bios Functions
 - [ ] Interrupt Handler
-- [ ] Some other Structs (OAM, ScreenBlocks, Serial Communications, usw.) 
+- [ ] Some other Structs (OAM, ScreenBlocks, usw.) 
 - [ ] CRT0 in Rust maybe ?
 
 ## Docs for me :
