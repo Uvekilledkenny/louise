@@ -1,0 +1,2310 @@
+<?xml version="1.0" encoding="utf-8"?>
+<device schemaVersion="1.1" 
+    xmlns:xs="http://www.w3.org/2001/XMLSchema-instance" xs:noNamespaceSchemaLocation="CMSIS-SVD.xsd">
+    <name>Game Boy Advance</name>
+    <version>0.5</version>
+    <description>Game Boy Advance SVD File for my Louise library </description>
+    <addressUnitBits>8</addressUnitBits>
+    <width>32</width>
+    <peripherals>
+        <!-- LCD -->
+        <peripheral>
+            <name>LCD</name>
+            <description>LCD I/O Registers</description>
+            <baseAddress>0x4000000</baseAddress>
+            <registers>
+                <!-- DISPCNT -->
+                <register>
+                    <name>DISPCNT</name>
+                    <description>LCD I/O Display Control</description>
+                    <addressOffset>0x0</addressOffset>
+                    <size>16</size>
+                    <access>read-write</access>
+                    <fields>
+                        <field>
+                            <name>BGMode</name>
+                            <description>Background Mode</description>
+                            <bitRange>[2:0]</bitRange>
+                            <access>read-write</access>
+                            <enumeratedValues>
+                                <enumeratedValue>
+                                    <name>Mode0</name>
+                                    <description>  0     No       0123   256x256..512x515   1024  16/16..256/1 SFMABP</description>
+                                    <value>0</value>
+                                </enumeratedValue>
+                                <enumeratedValue>
+                                    <name>Mode1</name>
+                                    <description>  1     Mixed    012-   (BG0,BG1 as above Mode 0, BG2 as below Mode 2)</description>
+                                    <value>1</value>
+                                </enumeratedValue>
+                                <enumeratedValue>
+                                    <name>Mode2</name>
+                                    <description>  2     Yes      --23   128x128..1024x1024 256   256/1        S-MABP</description>
+                                    <value>2</value>
+                                </enumeratedValue>
+                                <enumeratedValue>
+                                    <name>Mode3</name>
+                                    <description>  3     Yes      --2-   240x160            1     32768        --MABP</description>
+                                    <value>3</value>
+                                </enumeratedValue>
+                                <enumeratedValue>
+                                    <name>Mode4</name>
+                                    <description>  4     Yes      --2-   240x160            2     256/1        --MABP</description>
+                                    <value>4</value>
+                                </enumeratedValue>
+                                <enumeratedValue>
+                                    <name>Mode5</name>
+                                    <description>  5     Yes      --2-   160x128            2     32768        --MABP</description>
+                                    <value>5</value>
+                                </enumeratedValue>
+                            </enumeratedValues>
+                        </field>
+                        <field>
+                            <name>CGBMode</name>
+                            <description>Check if CGB or AGB mode</description>
+                            <bitRange>[3:3]</bitRange>
+                            <access>read-only</access>
+                        </field>
+                        <field>
+                            <name>DisplayFrameSelect</name>
+                            <description>Display Frame Select for only Background Mode 4/5</description>
+                            <bitRange>[4:4]</bitRange>
+                            <access>read-write</access>
+                        </field>
+                        <field>
+                            <name>HBIntervalFree</name>
+                            <description>Allow access to OAM during H-Blank</description>
+                            <bitRange>[5:5]</bitRange>
+                            <access>read-write</access>
+                        </field>
+                        <field>
+                            <name>OBJCharVRAMMapping</name>
+                            <description>OBJ Character VRAM Mapping</description>
+                            <bitRange>[6:6]</bitRange>
+                            <access>read-write</access>
+                            <enumeratedValues>
+                                <enumeratedValue>
+                                    <name>TwoDimension</name>
+                                    <description>One dimensional array</description>
+                                    <value>0</value>
+                                </enumeratedValue>
+                                <enumeratedValue>
+                                    <name>OneDimension</name>
+                                    <description>Two dimensional array</description>
+                                    <value>1</value>
+                                </enumeratedValue>
+                            </enumeratedValues>
+                        </field>
+                        <field>
+                            <name>ForcedBlank</name>
+                            <description>If set to 1, allows FAST access to VRAM, Palette, OAM</description>
+                            <bitRange>[7:7]</bitRange>
+                            <access>read-write</access>
+                        </field>
+                        <field>
+                            <name>DisplayBG0</name>
+                            <description>If set to 1, displays Background 0</description>
+                            <bitRange>[8:8]</bitRange>
+                            <access>read-write</access>
+                        </field>
+                        <field>
+                            <name>DisplayBG1</name>
+                            <description>If set to 1, displays Background 1</description>
+                            <bitRange>[9:9]</bitRange>
+                            <access>read-write</access>
+                        </field>
+                        <field>
+                            <name>DisplayBG2</name>
+                            <description>If set to 1, displays Background 2</description>
+                            <bitRange>[10:10]</bitRange>
+                            <access>read-write</access>
+                        </field>
+                        <field>
+                            <name>DisplayBG3</name>
+                            <description>If set to 1, displays Background 3</description>
+                            <bitRange>[11:11]</bitRange>
+                            <access>read-write</access>
+                        </field>
+                        <field>
+                            <name>DisplayOBJ</name>
+                            <description>If set to 1, displays Objects</description>
+                            <bitRange>[12:12]</bitRange>
+                            <access>read-write</access>
+                        </field>
+                        <field>
+                            <name>DisplayWindow0</name>
+                            <description>If set to 1, displays Window 0</description>
+                            <bitRange>[13:13]</bitRange>
+                            <access>read-write</access>
+                        </field>
+                        <field>
+                            <name>DisplayWindow1</name>
+                            <description>If set to 1, displays Window 1</description>
+                            <bitRange>[14:14]</bitRange>
+                            <access>read-write</access>
+                        </field>
+                        <field>
+                            <name>DisplayWindowOBJ</name>
+                            <description>If set to 1, displays Window Objects</description>
+                            <bitRange>[15:15]</bitRange>
+                            <access>read-write</access>
+                        </field>
+                    </fields>
+                </register>
+                <!-- DISPSTAT -->
+                <register>
+                    <name>DISPSTAT</name>
+                    <description>LCD I/O Interrupts</description>
+                    <addressOffset>0x4</addressOffset>
+                    <size>16</size>
+                    <access>read-write</access>
+                    <fields>
+                        <field>
+                            <name>VBlankFlag</name>
+                            <description>VBlank Status Flag</description>
+                            <bitRange>[0:0]</bitRange>
+                            <access>read-only</access>
+                        </field>
+                        <field>
+                            <name>HBlankFlag</name>
+                            <description>HBlank Status Flag</description>
+                            <bitRange>[1:1]</bitRange>
+                            <access>read-only</access>
+                        </field>
+                        <field>
+                            <name>VCounterFlag</name>
+                            <description>VCounter Status Flag</description>
+                            <bitRange>[2:2]</bitRange>
+                            <access>read-only</access>
+                        </field>
+                        <field>
+                            <name>VBlankIRQEnable</name>
+                            <description>VBlank IRQ Enable Flag</description>
+                            <bitRange>[3:3]</bitRange>
+                            <access>read-write</access>
+                        </field>
+                        <field>
+                            <name>HBlankIRQEnable</name>
+                            <description>HBlank IRQ Enable Flag</description>
+                            <bitRange>[4:4]</bitRange>
+                            <access>read-write</access>
+                        </field>
+                        <field>
+                            <name>VCounterIRQEnable</name>
+                            <description>VCounter IRQ Enable Flag</description>
+                            <bitRange>[5:5]</bitRange>
+                            <access>read-write</access>
+                        </field>
+                        <field>
+                            <name>VCountSettings</name>
+                            <description>The V-Count-Setting value is much the same as LYC of older gameboys, when its value is identical to the content of the VCOUNT register then the V-Counter flag is set (Bit 2), and (if enabled in Bit 5) an interrupt is requested.</description>
+                            <bitRange>[15:8]</bitRange>
+                            <access>read-write</access>
+                        </field>
+                    </fields>
+                </register>
+                <!-- VCOUNT -->
+                <register>
+                    <name>VCOUNT</name>
+                    <description>LCD VCount Status</description>
+                    <addressOffset>0x6</addressOffset>
+                    <size>16</size>
+                    <access>read-only</access>
+                    <fields>
+                        <field>
+                            <name>LY</name>
+                            <description>Current Scanline</description>
+                            <bitRange>[7:0]</bitRange>
+                            <access>read-only</access>
+                        </field>
+                    </fields>
+                </register>
+                <!-- BG0CNT -->
+                <register>
+                    <name>BG0CNT</name>
+                    <description>BG0 Control for Mode 0/1 only</description>
+                    <addressOffset>0x8</addressOffset>
+                    <size>16</size>
+                    <access>read-write</access>
+                    <fields>
+                        <field>
+                            <name>Priority</name>
+                            <description>Set Priority of this Background</description>
+                            <bitRange>[1:0]</bitRange>
+                            <access>read-write</access>
+                            <enumeratedValues>
+                                <enumeratedValue>
+                                    <name>Highest</name>
+                                    <value>0</value>
+                                </enumeratedValue>
+                                <enumeratedValue>
+                                    <name>High</name>
+                                    <value>1</value>
+                                </enumeratedValue>
+                                <enumeratedValue>
+                                    <name>Normal</name>
+                                    <value>2</value>
+                                </enumeratedValue>
+                                <enumeratedValue>
+                                    <name>Low</name>
+                                    <value>3</value>
+                                </enumeratedValue>
+                            </enumeratedValues>
+                        </field>
+                        <field>
+                            <name>CharacterBaseBlock</name>
+                            <description>Set BG Tile date in units of 16KB</description>
+                            <bitRange>[3:2]</bitRange>
+                            <access>read-write</access>
+                        </field>
+                        <field>
+                            <name>Mosaic</name>
+                            <description></description>
+                            <bitRange>[6:6]</bitRange>
+                            <access>read-write</access>
+                        </field>
+                        <field>
+                            <name>ColorsPalettes</name>
+                            <description>Set Palettes or Color Types</description>
+                            <bitRange>[7:7]</bitRange>
+                            <access>read-write</access>
+                            <enumeratedValues>
+                                <enumeratedValue>
+                                    <name>Limited</name>
+                                    <description>16 colors in 16 arrays</description>
+                                    <value>0</value>
+                                </enumeratedValue>
+                                <enumeratedValue>
+                                    <name>Full</name>
+                                    <description>256 colors in one array</description>
+                                    <value>1</value>
+                                </enumeratedValue>
+                            </enumeratedValues>
+                        </field>
+                        <field>
+                            <name>ScreenBaseBlock</name>
+                            <description>Set BG Map data in units of 2KB</description>
+                            <bitRange>[12:8]</bitRange>
+                            <access>read-write</access>
+                        </field>
+                        <field>
+                            <name>DisplayAreaOverflow</name>
+                            <description>How is Background displayed when Viewport reaches out this Background (only for Background 2/3)</description>
+                            <bitRange>[13:13]</bitRange>
+                            <access>read-write</access>
+                            <enumeratedValues>
+                                <enumeratedValue>
+                                    <name>Transparent</name>
+                                    <description>Background becomes transparent</description>
+                                    <value>0</value>
+                                </enumeratedValue>
+                                <enumeratedValue>
+                                    <name>Wraparound</name>
+                                    <description>Background will wrap around</description>
+                                    <value>1</value>
+                                </enumeratedValue>
+                            </enumeratedValues>
+                        </field>
+                        <field>
+                            <name>ScreenSize</name>
+                            <description>Sets the Screen Size</description>
+                            <bitRange>[14:15]</bitRange>
+                            <access>read-write</access>
+                            <enumeratedValues>
+                                <enumeratedValue>
+                                    <name>Small</name>
+                                    <description>Text Mode: 256x256 (2K) | Rotation/Scaling Mode: 128x128 (256 bytes)</description>
+                                    <value>0</value>
+                                </enumeratedValue>
+                                <enumeratedValue>
+                                    <name>Medium</name>
+                                    <description>Text Mode: 512x256 (4K) | Rotation/Scaling Mode: 256x256 (1K)</description>
+                                    <value>1</value>
+                                </enumeratedValue>
+                                <enumeratedValue>
+                                    <name>High</name>
+                                    <description>Text Mode: 256x512 (4K) | Rotation/Scaling Mode: 512x512 (4K)</description>
+                                    <value>2</value>
+                                </enumeratedValue>
+                                <enumeratedValue>
+                                    <name>Large</name>
+                                    <description>Text Mode: 512x512 (8K) | Rotation/Scaling Mode: 1024x1024 (16K)</description>
+                                    <value>3</value>
+                                </enumeratedValue>
+                            </enumeratedValues>
+                        </field>
+                    </fields>
+                </register>
+                <!-- BG1CNT -->
+                <register derivedFrom="BG0CNT">
+                    <name>BG1CNT</name>
+                    <description>BG1 Control for Mode 0/1 only</description>
+                    <addressOffset>0xA</addressOffset>
+                </register>
+                <!-- BG2CNT -->
+                <register derivedFrom="BG0CNT">
+                    <name>BG2CNT</name>
+                    <description>BG2 Control for Mode 0/1/2 only</description>
+                    <addressOffset>0xC</addressOffset>
+                </register>
+                <!-- BG3CNT -->
+                <register derivedFrom="BG0CNT">
+                    <name>BG3CNT</name>
+                    <description>BG3 Control for Mode 0/2 only</description>
+                    <addressOffset>0xE</addressOffset>
+                </register>
+                <!-- BG0HOFS -->
+                <register>
+                    <name>BG0HOFS</name>
+                    <description>This Background scrolling register are exclusively used in Text modes for all layers in BG Mode 0, and for the first two layers in BG mode 1.</description>
+                    <addressOffset>0x10</addressOffset>
+                    <size>16</size>
+                    <access>write-only</access>
+                    <fields>
+                        <field>
+                            <name>Offset</name>
+                            <description>Set the Horizontal Offset of this Background</description>
+                            <bitRange>[8:0]</bitRange>
+                            <access>write-only</access>
+                        </field>
+                    </fields>
+                </register>
+                <!-- BG0VOFS -->
+                <register>
+                    <name>BG0VOFS</name>
+                    <description>This Background scrolling register are exclusively used in Text modes for all layers in BG Mode 0, and for the first two layers in BG mode 1.</description>
+                    <addressOffset>0x12</addressOffset>
+                    <size>16</size>
+                    <access>write-only</access>
+                    <fields>
+                        <field>
+                            <name>Offset</name>
+                            <description>Set the Vertical Offset of this Background</description>
+                            <bitRange>[8:0]</bitRange>
+                            <access>write-only</access>
+                        </field>
+                    </fields>
+                </register>
+                <!-- BG1HOFS -->
+                <register derivedFrom="BG0HOFS">
+                    <name>BG1HOFS</name>
+                    <description>This Background scrolling register are exclusively used in Text modes for all layers in BG Mode 0, and for the first two layers in BG mode 1.</description>
+                    <addressOffset>0x14</addressOffset>
+                </register>
+                <!-- BG1VOFS -->
+                <register derivedFrom="BG0VOFS">
+                    <name>BG1VOFS</name>
+                    <description>This Background scrolling register are exclusively used in Text modes for all layers in BG Mode 0, and for the first two layers in BG mode 1.</description>
+                    <addressOffset>0x16</addressOffset>
+                </register>
+                <!-- BG2HOFS -->
+                <register derivedFrom="BG0HOFS">
+                    <name>BG2HOFS</name>
+                    <description>This Background scrolling register are exclusively used in Text modes for all layers in BG Mode 0, and for the first two layers in BG mode 1.</description>
+                    <addressOffset>0x18</addressOffset>
+                </register>
+                <!-- BG2VOFS -->
+                <register derivedFrom="BG0VOFS">
+                    <name>BG2VOFS</name>
+                    <description>This Background scrolling register are exclusively used in Text modes for all layers in BG Mode 0, and for the first two layers in BG mode 1.</description>
+                    <addressOffset>0x1A</addressOffset>
+                </register>
+                <!-- BG3HOFS -->
+                <register derivedFrom="BG0HOFS">
+                    <name>BG3HOFS</name>
+                    <description>This Background scrolling register are exclusively used in Text modes for all layers in BG Mode 0, and for the first two layers in BG mode 1.</description>
+                    <addressOffset>0x1C</addressOffset>
+                </register>
+                <!-- BG3VOFS -->
+                <register derivedFrom="BG0VOFS">
+                    <name>BG3VOFS</name>
+                    <description>This Background scrolling register are exclusively used in Text modes for all layers in BG Mode 0, and for the first two layers in BG mode 1.</description>
+                    <addressOffset>0x1E</addressOffset>
+                </register>
+                <!-- BG2PA -->
+                <register>
+                    <name>BG2PA</name>
+                    <description>BG2 Rotation/Scaling Parameter A (alias dx)</description>
+                    <addressOffset>0x20</addressOffset>
+                    <size>16</size>
+                    <access>write-only</access>
+                    <fields>
+                        <field>
+                            <name>FractionalPortion</name>
+                            <description></description>
+                            <bitRange>[7:0]</bitRange>
+                            <access>write-only</access>
+                        </field>
+                        <field>
+                            <name>IntegerPortion</name>
+                            <description></description>
+                            <bitRange>[14:8]</bitRange>
+                            <access>write-only</access>
+                        </field>
+                        <field>
+                            <name>Sign</name>
+                            <description></description>
+                            <bitRange>[15:15]</bitRange>
+                            <access>write-only</access>
+                        </field>
+                    </fields>
+                </register>
+                <!-- BG2PB -->
+                <register derivedFrom="BG2PA">
+                    <name>BG2PB</name>
+                    <description>BG2 Rotation/Scaling Parameter B (alias dmx)</description>
+                    <addressOffset>0x22</addressOffset>
+                </register>
+                <!-- BG2PC -->
+                <register derivedFrom="BG2PA">
+                    <name>BG2PC</name>
+                    <description>BG2 Rotation/Scaling Parameter C (alias dy)</description>
+                    <addressOffset>0x24</addressOffset>
+                </register>
+                <!-- BG2PD -->
+                <register derivedFrom="BG2PA">
+                    <name>BG2PD</name>
+                    <description>BG2 Rotation/Scaling Parameter D (alias dmy)</description>
+                    <addressOffset>0x26</addressOffset>
+                </register>
+                <!-- BG2PX -->
+                <register>
+                    <name>BG2PX</name>
+                    <description>BG2 Reference Point X-Coordinate</description>
+                    <addressOffset>0x28</addressOffset>
+                    <size>32</size>
+                    <access>write-only</access>
+                    <fields>
+                        <field>
+                            <name>FractionalPortion</name>
+                            <description></description>
+                            <bitRange>[7:0]</bitRange>
+                            <access>write-only</access>
+                        </field>
+                        <field>
+                            <name>IntegerPortion</name>
+                            <description></description>
+                            <bitRange>[26:8]</bitRange>
+                            <access>write-only</access>
+                        </field>
+                        <field>
+                            <name>Sign</name>
+                            <description></description>
+                            <bitRange>[27:27]</bitRange>
+                            <access>write-only</access>
+                        </field>
+                    </fields>
+                </register>
+                <!-- BG2PY -->
+                <register derivedFrom="BG2PX">
+                    <name>BG2PY</name>
+                    <description>BG2 Reference Point Y-Coordinate</description>
+                    <addressOffset>0x2C</addressOffset>
+                </register>
+                <!-- BG3PA -->
+                <register derivedFrom="BG2PA">
+                    <name>BG3PA</name>
+                    <description>BG3 Rotation/Scaling Parameter A (dx)</description>
+                    <addressOffset>0x30</addressOffset>
+                </register>
+                <!-- BG3PB -->
+                <register derivedFrom="BG2PA">
+                    <name>BG3PB</name>
+                    <description>BG3 Rotation/Scaling Parameter B (dmx)</description>
+                    <addressOffset>0x32</addressOffset>
+                </register>
+                <!-- BG3PC -->
+                <register derivedFrom="BG2PA">
+                    <name>BG3PC</name>
+                    <description>BG3 Rotation/Scaling Parameter C (dy)</description>
+                    <addressOffset>0x34</addressOffset>
+                </register>
+                <!-- BG3PD -->
+                <register derivedFrom="BG2PA">
+                    <name>BG3PD</name>
+                    <description>BG3 Rotation/Scaling Parameter D (dmy)</description>
+                    <addressOffset>0x36</addressOffset>
+                </register>
+                <!-- BG3PX -->
+                <register derivedFrom="BG2PX">
+                    <name>BG3PX</name>
+                    <description>BG3 Reference Point X-Coordinate</description>
+                    <addressOffset>0x38</addressOffset>
+                </register>
+                <!-- BG3PY -->
+                <register derivedFrom="BG2PX">
+                    <name>BG3PY</name>
+                    <description>BG3 Reference Point Y-Coordinate</description>
+                    <addressOffset>0x3C</addressOffset>
+                </register>
+                <!-- WIN0H -->
+                <register>
+                    <name>WIN0H</name>
+                    <description>Window 0 Horizontal Dimensions</description>
+                    <addressOffset>0x40</addressOffset>
+                    <size>16</size>
+                    <access>write-only</access>
+                    <fields>
+                        <field>
+                            <name>X2</name>
+                            <description>Rightmost coordinate of window, plus 1</description>
+                            <bitRange>[7:0]</bitRange>
+                            <access>write-only</access>
+                        </field>
+                        <field>
+                            <name>X1</name>
+                            <description>Leftmost coordinate of window</description>
+                            <bitRange>[15:8]</bitRange>
+                            <access>write-only</access>
+                        </field>
+                    </fields>
+                </register>
+                <!-- WIN1H -->
+                <register derivedFrom="WIN0H">
+                    <name>WIN1H</name>
+                    <description>Window 1 Horizontal Dimensions</description>
+                    <addressOffset>0x42</addressOffset>
+                </register>
+                <!-- WIN0V -->
+                <register>
+                    <name>WIN0V</name>
+                    <description>Window 0 Vertical Dimensions</description>
+                    <addressOffset>0x44</addressOffset>
+                    <size>16</size>
+                    <access>write-only</access>
+                    <fields>
+                        <field>
+                            <name>Y2</name>
+                            <description>Bottom-most coordinate of window, plus 1</description>
+                            <bitRange>[7:0]</bitRange>
+                            <access>write-only</access>
+                        </field>
+                        <field>
+                            <name>Y1</name>
+                            <description>Top-most coordinate of window</description>
+                            <bitRange>[15:8]</bitRange>
+                            <access>write-only</access>
+                        </field>
+                    </fields>
+                </register>
+                <!-- WIN1V -->
+                <register derivedFrom="WIN0V">
+                    <name>WIN1V</name>
+                    <description>Window 1 Vertical Dimensions</description>
+                    <addressOffset>0x46</addressOffset>
+                </register>
+                <!-- WININ -->
+                <register>
+                    <name>WININ</name>
+                    <description>Control of Inside of Window(s)</description>
+                    <addressOffset>0x48</addressOffset>
+                    <size>16</size>
+                    <access>read-write</access>
+                    <fields>
+                        <field>
+                            <name>W0BG0Flag</name>
+                            <description>Window 0 BG0 Enable Bit</description>
+                            <bitRange>[0:0]</bitRange>
+                            <access>read-write</access>
+                        </field>
+                        <field>
+                            <name>W0BG1Flag</name>
+                            <description>Window 0 BG1 Enable Bit</description>
+                            <bitRange>[1:1]</bitRange>
+                            <access>read-write</access>
+                        </field>
+                        <field>
+                            <name>W0BG2Flag</name>
+                            <description>Window 0 BG2 Enable Bit</description>
+                            <bitRange>[2:2]</bitRange>
+                            <access>read-write</access>
+                        </field>
+                        <field>
+                            <name>W0BG3Flag</name>
+                            <description>Window 0 BG3 Enable Bit</description>
+                            <bitRange>[3:3]</bitRange>
+                            <access>read-write</access>
+                        </field>
+                        <field>
+                            <name>W0OBJFlag</name>
+                            <description>Window 0 OBJ Enable Bit</description>
+                            <bitRange>[4:4]</bitRange>
+                            <access>read-write</access>
+                        </field>
+                        <field>
+                            <name>W0ColorSFXFlag</name>
+                            <description>Window 0 Color Special Effect</description>
+                            <bitRange>[5:5]</bitRange>
+                            <access>read-write</access>
+                        </field>
+                        <field>
+                            <name>W1BG0Flag</name>
+                            <description>Window 1 BG0 Enable Bit</description>
+                            <bitRange>[8:8]</bitRange>
+                            <access>read-write</access>
+                        </field>
+                        <field>
+                            <name>W1BG1Flag</name>
+                            <description>Window 1 BG1 Enable Bit</description>
+                            <bitRange>[9:9]</bitRange>
+                            <access>read-write</access>
+                        </field>
+                        <field>
+                            <name>W1BG2Flag</name>
+                            <description>Window 1 BG2 Enable Bit</description>
+                            <bitRange>[10:10]</bitRange>
+                            <access>read-write</access>
+                        </field>
+                        <field>
+                            <name>W1BG3Flag</name>
+                            <description>Window 1 BG3 Enable Bit</description>
+                            <bitRange>[11:11]</bitRange>
+                            <access>read-write</access>
+                        </field>
+                        <field>
+                            <name>W1OBJFlag</name>
+                            <description>Window 1 OBJ Enable Bit</description>
+                            <bitRange>[12:12]</bitRange>
+                            <access>read-write</access>
+                        </field>
+                        <field>
+                            <name>W1ColorSFXFlag</name>
+                            <description>Window 1 Color Special Effect</description>
+                            <bitRange>[13:13]</bitRange>
+                            <access>read-write</access>
+                        </field>
+                    </fields>
+                </register>
+                <!-- WINOUT -->
+                <register>
+                    <name>WINOUT</name>
+                    <description>Control of Outside of Windows & Inside of OBJ Window</description>
+                    <addressOffset>0x4A</addressOffset>
+                    <size>16</size>
+                    <access>read-write</access>
+                    <fields>
+                        <field>
+                            <name>OutBG0Flag</name>
+                            <description>Outside BG0 Enable Bit</description>
+                            <bitRange>[0:0]</bitRange>
+                            <access>read-write</access>
+                        </field>
+                        <field>
+                            <name>OutBG1Flag</name>
+                            <description>Outside BG1 Enable Bit</description>
+                            <bitRange>[1:1]</bitRange>
+                            <access>read-write</access>
+                        </field>
+                        <field>
+                            <name>OutBG2Flag</name>
+                            <description>Outside BG2 Enable Bit</description>
+                            <bitRange>[2:2]</bitRange>
+                            <access>read-write</access>
+                        </field>
+                        <field>
+                            <name>OutBG3Flag</name>
+                            <description>Outside BG3 Enable Bit</description>
+                            <bitRange>[3:3]</bitRange>
+                            <access>read-write</access>
+                        </field>
+                        <field>
+                            <name>OutOBJFlag</name>
+                            <description>Outside OBJ Enable Bit</description>
+                            <bitRange>[4:4]</bitRange>
+                            <access>read-write</access>
+                        </field>
+                        <field>
+                            <name>OutColorSFXFlag</name>
+                            <description>Outside Color Special Effect</description>
+                            <bitRange>[5:5]</bitRange>
+                            <access>read-write</access>
+                        </field>
+                        <field>
+                            <name>OBJWBG0Flag</name>
+                            <description>OBJ Window BG0 Enable Bit</description>
+                            <bitRange>[8:8]</bitRange>
+                            <access>read-write</access>
+                        </field>
+                        <field>
+                            <name>OBJWBG1Flag</name>
+                            <description>OBJ Window BG1 Enable Bit</description>
+                            <bitRange>[9:9]</bitRange>
+                            <access>read-write</access>
+                        </field>
+                        <field>
+                            <name>OBJWBG2Flag</name>
+                            <description>OBJ Window BG2 Enable Bit</description>
+                            <bitRange>[10:10]</bitRange>
+                            <access>read-write</access>
+                        </field>
+                        <field>
+                            <name>OBJWBG3Flag</name>
+                            <description>OBJ Window BG3 Enable Bit</description>
+                            <bitRange>[11:11]</bitRange>
+                            <access>read-write</access>
+                        </field>
+                        <field>
+                            <name>OBJWOBJFlag</name>
+                            <description>OBJ Window OBJ Enable Bit</description>
+                            <bitRange>[12:12]</bitRange>
+                            <access>read-write</access>
+                        </field>
+                        <field>
+                            <name>OBJWColorSFXFlag</name>
+                            <description>OBJ Window Color Special Effect</description>
+                            <bitRange>[13:13]</bitRange>
+                            <access>read-write</access>
+                        </field>
+                    </fields>
+                </register>
+                <!-- MOSAIC -->
+                <register>
+                    <name>MOSAIC</name>
+                    <description>Mosaic Size</description>
+                    <addressOffset>0x4C</addressOffset>
+                    <size>16</size>
+                    <access>write-only</access>
+                    <fields>
+                        <field>
+                            <name>BGMosaicHSize</name>
+                            <description>BG Mosaic H-Size (minus 1)</description>
+                            <bitRange>[3:0]</bitRange>
+                            <access>write-only</access>
+                        </field>
+                        <field>
+                            <name>BGMosaicHSize</name>
+                            <description>BG Mosaic V-Size (minus 1)</description>
+                            <bitRange>[7:4]</bitRange>
+                            <access>write-only</access>
+                        </field>
+                        <field>
+                            <name>OBJMosaicHSize</name>
+                            <description>OBJ Mosaic H-Size (minus 1)</description>
+                            <bitRange>[11:8]</bitRange>
+                            <access>write-only</access>
+                        </field>
+                        <field>
+                            <name>OBJMosaicVSize</name>
+                            <description>OBJ Mosaic V-Size (minus 1)</description>
+                            <bitRange>[15:12]</bitRange>
+                            <access>write-only</access>
+                        </field>
+                    </fields>
+                </register>
+                <!-- BLDCNT -->
+                <register>
+                    <name>BLDCNT</name>
+                    <description>Color Special Effects Selection</description>
+                    <addressOffset>0x50</addressOffset>
+                    <size>16</size>
+                    <access>read-write</access>
+                    <fields>
+                        <field>
+                            <name>BG0FirstTarget</name>
+                            <description>BG0 1st Target Pixel (Background 0)</description>
+                            <bitRange>[0:0]</bitRange>
+                            <access>read-write</access>
+                        </field>
+                        <field>
+                            <name>BG1FirstTarget</name>
+                            <description>BG1 1st Target Pixel (Background 1)</description>
+                            <bitRange>[1:1]</bitRange>
+                            <access>read-write</access>
+                        </field>
+                        <field>
+                            <name>BG2FirstTarget</name>
+                            <description>BG2 1st Target Pixel (Background 2)</description>
+                            <bitRange>[2:2]</bitRange>
+                            <access>read-write</access>
+                        </field>
+                        <field>
+                            <name>BG3FirstTarget</name>
+                            <description>BG3 1st Target Pixel (Background 3)</description>
+                            <bitRange>[3:3]</bitRange>
+                            <access>read-write</access>
+                        </field>
+                        <field>
+                            <name>OBJFirstTarget</name>
+                            <description>OBJ 1st Target Pixel (Top-most OBJ pixel)</description>
+                            <bitRange>[4:4]</bitRange>
+                            <access>read-write</access>
+                        </field>
+                        <field>
+                            <name>BDFirstTarget</name>
+                            <description>BD 1st Target Pixel (Backdrop)</description>
+                            <bitRange>[5:5]</bitRange>
+                            <access>read-write</access>
+                        </field>
+                        <field>
+                            <name>ColorSFX</name>
+                            <description>Color Special Effect</description>
+                            <bitRange>[7:6]</bitRange>
+                            <access>read-write</access>
+                            <enumeratedValues>
+                                <enumeratedValue>
+                                    <name>None</name>
+                                    <description>Special effects disabled</description>
+                                    <value>0</value>
+                                </enumeratedValue>
+                                <enumeratedValue>
+                                    <name>AlphaBlending</name>
+                                    <description>1st+2nd Target mixed</description>
+                                    <value>1</value>
+                                </enumeratedValue>
+                                <enumeratedValue>
+                                    <name>BrightnessIncrease</name>
+                                    <description>1st Target becomes whiter</description>
+                                    <value>2</value>
+                                </enumeratedValue>
+                                <enumeratedValue>
+                                    <name>BrightnessDecrease</name>
+                                    <description>1st Target becomes blacker</description>
+                                    <value>3</value>
+                                </enumeratedValue>
+                            </enumeratedValues>
+                        </field>
+                        <field>
+                            <name>BG0SecondTarget</name>
+                            <description>BG0 2nd Target Pixel (Background 0)</description>
+                            <bitRange>[8:8]</bitRange>
+                            <access>read-write</access>
+                        </field>
+                        <field>
+                            <name>BG1SecondTarget</name>
+                            <description>BG1 2nd Target Pixel (Background 1)</description>
+                            <bitRange>[9:9]</bitRange>
+                            <access>read-write</access>
+                        </field>
+                        <field>
+                            <name>BG2SecondTarget</name>
+                            <description>BG2 2nd Target Pixel (Background 2)</description>
+                            <bitRange>[10:10]</bitRange>
+                            <access>read-write</access>
+                        </field>
+                        <field>
+                            <name>BG3SecondTarget</name>
+                            <description>BG3 2nd Target Pixel (Background 3)</description>
+                            <bitRange>[11:11]</bitRange>
+                            <access>read-write</access>
+                        </field>
+                        <field>
+                            <name>OBJSecondTarget</name>
+                            <description>OBJ 2nd Target Pixel (Top-most OBJ pixel)</description>
+                            <bitRange>[12:12]</bitRange>
+                            <access>read-write</access>
+                        </field>
+                        <field>
+                            <name>BDSecondTarget</name>
+                            <description>BD 2nd Target Pixel (Backdrop)</description>
+                            <bitRange>[13:13]</bitRange>
+                            <access>read-write</access>
+                        </field>
+                    </fields>
+                </register>
+                <!-- BLDALPHA -->
+                <register>
+                    <name>BLDALPHA</name>
+                    <description>Alpha Blending Coefficient</description>
+                    <addressOffset>0x52</addressOffset>
+                    <size>16</size>
+                    <access>write-only</access>
+                    <fields>
+                        <field>
+                            <name>EVACoefficient</name>
+                            <description>EVA Coefficient (1st Target) (0..16 = 0/16..16/16, 17..31=16/16)</description>
+                            <bitRange>[4:0]</bitRange>
+                            <access>write-only</access>
+                        </field>
+                        <field>
+                            <name>EVBCoefficient</name>
+                            <description>EVB Coefficient (2nd Target) (0..16 = 0/16..16/16, 17..31=16/16)</description>
+                            <bitRange>[12:8]</bitRange>
+                            <access>write-only</access>
+                        </field>
+                    </fields>
+                </register>
+                <!-- BLDY -->
+                <register>
+                    <name>BLDY</name>
+                    <description>Brightness (Fade-In/Out) Coefficient</description>
+                    <addressOffset>0x54</addressOffset>
+                    <size>16</size>
+                    <access>write-only</access>
+                    <fields>
+                        <field>
+                            <name>EVYCoefficient</name>
+                            <description>EVY Coefficient (Brightness) (0..16 = 0/16..16/16, 17..31=16/16)</description>
+                            <bitRange>[4:0]</bitRange>
+                            <access>write-only</access>
+                        </field>
+                    </fields>
+                </register>
+            </registers>
+        </peripheral>
+        <!-- Sound -->
+        <peripheral>
+            <name>Sound</name>
+            <description>GBA Sound Controller</description>
+            <baseAddress>0x4000060</baseAddress>
+            <registers>
+                <!-- SOUND1CNT_L -->
+                <register>
+                    <name>SOUND1CNT_L</name>
+                    <description>Channel 1 Sweep register</description>
+                    <addressOffset>0x0</addressOffset>
+                    <size>16</size>
+                    <access>read-write</access>
+                    <fields>
+                        <field>
+                            <name>SweepShift</name>
+                            <description>Number of sweep shift (n=0-7)</description>
+                            <bitRange>[2:0]</bitRange>
+                            <access>read-write</access>
+                        </field>
+                        <field>
+                            <name>SweepFrequencyDir</name>
+                            <description>Sweep Frequency Direction</description>
+                            <bitRange>[3:3]</bitRange>
+                            <access>read-write</access>
+                            <enumeratedValues>
+                                <enumeratedValue>
+                                    <name>Increase</name>
+                                    <value>0</value>
+                                </enumeratedValue>
+                                <enumeratedValue>
+                                    <name>Decrease</name>
+                                    <value>1</value>
+                                </enumeratedValue>
+                            </enumeratedValues>
+                        </field>
+                        <field>
+                            <name>SweepTime</name>
+                            <description>Sweep Time; units of 7.8ms (0-7, min=7.8ms, max=54.7ms)</description>
+                            <bitRange>[6:4]</bitRange>
+                            <access>read-write</access>
+                        </field>
+                    </fields>
+                </register>
+                <!-- SOUND1CNT_H -->
+                <register>
+                    <name>SOUND1CNT_H</name>
+                    <description>Channel 1 Duty/Len/Envelope</description>
+                    <addressOffset>0x2</addressOffset>
+                    <size>16</size>
+                    <access>read-write</access>
+                    <fields>
+                        <field>
+                            <name>Length</name>
+                            <description>Sound length; units of (64-n)/256s</description>
+                            <bitRange>[5:0]</bitRange>
+                            <access>write-only</access>
+                        </field>
+                        <field>
+                            <name>WavePatternDuty</name>
+                            <description>Wave Pattern Duty</description>
+                            <bitRange>[7:6]</bitRange>
+                            <access>read-write</access>
+                            <enumeratedValues>
+                                <enumeratedValue>
+                                    <name>Eight</name>
+                                    <description>12.5%</description>
+                                    <value>0</value>
+                                </enumeratedValue>
+                                <enumeratedValue>
+                                    <name>Quarter</name>
+                                    <description>25%</description>
+                                    <value>1</value>
+                                </enumeratedValue>
+                                <enumeratedValue>
+                                    <name>Half</name>
+                                    <description>50%</description>
+                                    <value>2</value>
+                                </enumeratedValue>
+                                <enumeratedValue>
+                                    <name>ThreeQuarters</name>
+                                    <description>75%</description>
+                                    <value>3</value>
+                                </enumeratedValue>
+                            </enumeratedValues>
+                        </field>
+                        <field>
+                            <name>EnvelopeStepTime</name>
+                            <description>Envelope Step-Time; units of n/64s (0 = No Envelope)</description>
+                            <bitRange>[10:8]</bitRange>
+                            <access>read-write</access>
+                        </field>
+                        <field>
+                            <name>EnvelopeDir</name>
+                            <description>Envelope Direction</description>
+                            <bitRange>[11:11]</bitRange>
+                            <access>read-write</access>
+                            <enumeratedValues>
+                                <enumeratedValue>
+                                    <name>Descrease</name>
+                                    <value>0</value>
+                                </enumeratedValue>
+                                <enumeratedValue>
+                                    <name>Increase</name>
+                                    <value>1</value>
+                                </enumeratedValue>
+                            </enumeratedValues>
+                        </field>
+                        <field>
+                            <name>InitialEnvelopeVol</name>
+                            <description>Initial Volume of envelope (0 = No Sound)</description>
+                            <bitRange>[15:12]</bitRange>
+                            <access>read-write</access>
+                        </field>
+                    </fields>
+                </register>
+                <!-- SOUND1CNT_X -->
+                <register>
+                    <name>SOUND1CNT_X</name>
+                    <description>Channel 1 Frequency/Control</description>
+                    <addressOffset>0x4</addressOffset>
+                    <size>16</size>
+                    <access>read-write</access>
+                    <fields>
+                        <field>
+                            <name>Frequency</name>
+                            <description>Frequency; 131072/(2048-n)Hz  (0-2047)</description>
+                            <bitRange>[10:0]</bitRange>
+                            <access>write-only</access>
+                        </field>
+                        <field>
+                            <name>LengthFlag</name>
+                            <description>Length Flag (1=Stop output when length in NR11 expires)</description>
+                            <bitRange>[14:14]</bitRange>
+                            <access>read-write</access>
+                        </field>
+                        <field>
+                            <name>Initial</name>
+                            <description>Initial (1=Restart Sound)</description>
+                            <bitRange>[15:15]</bitRange>
+                            <access>write-only</access>
+                        </field>
+                    </fields>
+                </register>
+                <!-- SOUND2CNT_L -->
+                <register derivedFrom="SOUND1CNT_H">
+                    <name>SOUND2CNT_L</name>
+                    <description>Channel 2 Duty/Length/Envelope</description>
+                    <addressOffset>0x8</addressOffset>
+                </register>
+                <!-- SOUND2CNT_H -->
+                <register derivedFrom="SOUND1CNT_X">
+                    <name>SOUND2CNT_H</name>
+                    <description>Channel 2 Frequency/Control</description>
+                    <addressOffset>0xC</addressOffset>
+                </register>
+                <!-- SOUND3CNT_L -->
+                <register>
+                    <name>SOUND3CNT_L</name>
+                    <description>Channel 3 Stop/Wave RAM select</description>
+                    <addressOffset>0x10</addressOffset>
+                    <size>16</size>
+                    <access>read-write</access>
+                    <fields>
+                        <field>
+                            <name>WaveRAMDim</name>
+                            <description>Wave RAM Dimension</description>
+                            <bitRange>[5:5]</bitRange>
+                            <access>read-write</access>
+                            <enumeratedValues>
+                                <enumeratedValue>
+                                    <name>OneBank</name>
+                                    <description>One bank/32 digits</description>
+                                    <value>0</value>
+                                </enumeratedValue>
+                                <enumeratedValue>
+                                    <name>TwoBanks</name>
+                                    <description>Two banks/64 digits</description>
+                                    <value>1</value>
+                                </enumeratedValue>
+                            </enumeratedValues>
+                        </field>
+                        <field>
+                            <name>WaveBankNum</name>
+                            <description>The currently selected Bank Number (Bit 6) will be played back, while reading/writing to/from wave RAM will address the other (not selected) bank. When dimension is set to two banks, output will start by replaying the currently selected bank.</description>
+                            <bitRange>[6:6]</bitRange>
+                            <access>read-write</access>
+                        </field>
+                        <field>
+                            <name>SoundChannelOff</name>
+                            <description>Sound Channel 3 Off</description>
+                            <bitRange>[7:7]</bitRange>
+                            <access>read-write</access>
+                            <enumeratedValues>
+                                <enumeratedValue>
+                                    <name>Stop</name>
+                                    <value>0</value>
+                                </enumeratedValue>
+                                <enumeratedValue>
+                                    <name>Playback</name>
+                                    <value>1</value>
+                                </enumeratedValue>
+                            </enumeratedValues>
+                        </field>
+                    </fields>
+                </register>
+                <!-- SOUND3CNT_H -->
+                <register>
+                    <name>SOUND3CNT_H</name>
+                    <description>Channel 3 Length/Volume</description>
+                    <addressOffset>0x12</addressOffset>
+                    <size>16</size>
+                    <access>read-write</access>
+                    <fields>
+                        <field>
+                            <name>Length</name>
+                            <description>Sound length; units of (256-n)/256s  (0-255)</description>
+                            <bitRange>[7:0]</bitRange>
+                            <access>write-only</access>
+                        </field>
+                        <field>
+                            <name>Volume</name>
+                            <description>Sound Volume</description>
+                            <bitRange>[14:13]</bitRange>
+                            <access>read-write</access>
+                            <enumeratedValues>
+                                <enumeratedValue>
+                                    <name>Mute</name>
+                                    <value>0</value>
+                                </enumeratedValue>
+                                <enumeratedValue>
+                                    <name>Full</name>
+                                    <value>1</value>
+                                </enumeratedValue>
+                                <enumeratedValue>
+                                    <name>Half</name>
+                                    <value>2</value>
+                                </enumeratedValue>
+                                <enumeratedValue>
+                                    <name>Quarter</name>
+                                    <value>3</value>
+                                </enumeratedValue>
+                            </enumeratedValues>
+                        </field>
+                        <field>
+                            <name>ForceVolume</name>
+                            <description>Force Volume</description>
+                            <bitRange>[15:15]</bitRange>
+                            <access>read-write</access>
+                            <enumeratedValues>
+                                <enumeratedValue>
+                                    <name>None</name>
+                                    <description>Use Volume field</description>
+                                    <value>0</value>
+                                </enumeratedValue>
+                                <enumeratedValue>
+                                    <name>Force</name>
+                                    <description>Force 75% regardless of Volume field</description>
+                                    <value>1</value>
+                                </enumeratedValue>
+                            </enumeratedValues>
+                        </field>
+                    </fields>
+                </register>
+                <!-- SOUND3CNT_X -->
+                <register>
+                    <name>SOUND3CNT_X</name>
+                    <description>Channel 3 Frequency/Control</description>
+                    <addressOffset>0x14</addressOffset>
+                    <size>16</size>
+                    <access>read-write</access>
+                    <fields>
+                        <field>
+                            <name>SampleRate</name>
+                            <description>Sample Rate; 2097152/(2048-n) Hz (0-2047)</description>
+                            <bitRange>[10:0]</bitRange>
+                            <access>write-only</access>
+                        </field>
+                        <field>
+                            <name>LengthFlag</name>
+                            <description>Length Flag (1=Stop output when length in NR31 expires)</description>
+                            <bitRange>[14:14]</bitRange>
+                            <access>read-write</access>
+                        </field>
+                        <field>
+                            <name>Initial</name>
+                            <description>Initial (1=Restart Sound)</description>
+                            <bitRange>[15:15]</bitRange>
+                            <access>write-only</access>
+                        </field>
+                    </fields>
+                </register>
+                <!-- SOUND4CNT_L -->
+                <register>
+                    <name>SOUND4CNT_L</name>
+                    <description>Channel 4 Length/Envelope</description>
+                    <addressOffset>0x18</addressOffset>
+                    <size>16</size>
+                    <access>read-write</access>
+                    <fields>
+                        <field>
+                            <name>Length</name>
+                            <description>Sound length; units of (64-n)/256s</description>
+                            <bitRange>[5:0]</bitRange>
+                            <access>write-only</access>
+                        </field>
+                        <field>
+                            <name>EnvelopeStepTime</name>
+                            <description>Envelope Step-Time; units of n/64s (0 = No Envelope)</description>
+                            <bitRange>[10:8]</bitRange>
+                            <access>read-write</access>
+                        </field>
+                        <field>
+                            <name>EnvelopeDir</name>
+                            <description>Envelope Direction</description>
+                            <bitRange>[11:11]</bitRange>
+                            <access>read-write</access>
+                            <enumeratedValues>
+                                <enumeratedValue>
+                                    <name>Descrease</name>
+                                    <value>0</value>
+                                </enumeratedValue>
+                                <enumeratedValue>
+                                    <name>Increase</name>
+                                    <value>1</value>
+                                </enumeratedValue>
+                            </enumeratedValues>
+                        </field>
+                        <field>
+                            <name>InitialEnvelopeVol</name>
+                            <description>Initial Volume of envelope (0 = No Sound)</description>
+                            <bitRange>[15:12]</bitRange>
+                            <access>read-write</access>
+                        </field>
+                    </fields>
+                </register>
+                <!-- SOUND4CNT_H -->
+                <register>
+                    <name>SOUND4CNT_H</name>
+                    <description>Channel 4 Frequency/Control</description>
+                    <addressOffset>0x1C</addressOffset>
+                    <size>16</size>
+                    <access>read-write</access>
+                    <fields>
+                        <field>
+                            <name>DividingRatio</name>
+                            <description>Dividing Ratio of Frequencies (r)</description>
+                            <bitRange>[2:0]</bitRange>
+                            <access>read-write</access>
+                        </field>
+                        <field>
+                            <name>Width</name>
+                            <description>Counter Step/Width</description>
+                            <bitRange>[3:3]</bitRange>
+                            <access>read-write</access>
+                            <enumeratedValues>
+                                <enumeratedValue>
+                                    <name>Full</name>
+                                    <description>15 bits</description>
+                                    <value>0</value>
+                                </enumeratedValue>
+                                <enumeratedValue>
+                                    <name>Half</name>
+                                    <description>7 bits</description>
+                                    <value>1</value>
+                                </enumeratedValue>
+                            </enumeratedValues>
+                        </field>
+                        <field>
+                            <name>ShiftClockFrequency</name>
+                            <description>Shift Clock Frequency (s)</description>
+                            <bitRange>[7:4]</bitRange>
+                            <access>read-write</access>
+                        </field>
+                        <field>
+                            <name>LengthFlag</name>
+                            <description>Length Flag (1=Stop output when length in NR41 expires)</description>
+                            <bitRange>[14:14]</bitRange>
+                            <access>read-write</access>
+                        </field>
+                        <field>
+                            <name>Initial</name>
+                            <description>Initial (1=Restart Sound)</description>
+                            <bitRange>[15:15]</bitRange>
+                            <access>write-only</access>
+                        </field>
+                    </fields>
+                </register>
+                <!-- SOUNDCNT_L -->
+                <register>
+                    <name>SOUNDCNT_L</name>
+                    <description>Control Stereo/Volume/Enable</description>
+                    <addressOffset>0x20</addressOffset>
+                    <size>16</size>
+                    <access>read-write</access>
+                    <fields>
+                        <field>
+                            <name>MasterVolumeRight</name>
+                            <description>Sound 1-4 Master Volume RIGHT (0-7)</description>
+                            <bitRange>[2:0]</bitRange>
+                            <access>read-write</access>
+                        </field>
+                        <field>
+                            <name>MasterVolumeLeft</name>
+                            <description>Sound 1-4 Master Volume LEFT (0-7)</description>
+                            <bitRange>[6:4]</bitRange>
+                            <access>read-write</access>
+                        </field>
+                        <field>
+                            <name>Sound1EnableRight</name>
+                            <description>Enable Sound 1 Master RIGHT</description>
+                            <bitRange>[8:8]</bitRange>
+                            <access>read-write</access>
+                        </field>
+                        <field>
+                            <name>Sound2EnableRight</name>
+                            <description>Enable Sound 2 Master RIGHT</description>
+                            <bitRange>[9:9]</bitRange>
+                            <access>read-write</access>
+                        </field>
+                        <field>
+                            <name>Sound3EnableRight</name>
+                            <description>Enable Sound 3 Master RIGHT</description>
+                            <bitRange>[10:10]</bitRange>
+                            <access>read-write</access>
+                        </field>
+                        <field>
+                            <name>Sound4EnableRight</name>
+                            <description>Enable Sound 4 Master RIGHT</description>
+                            <bitRange>[11:11]</bitRange>
+                            <access>read-write</access>
+                        </field>
+                        <field>
+                            <name>Sound1EnableLeft</name>
+                            <description>Enable Sound 1 Master LEFT</description>
+                            <bitRange>[12:12]</bitRange>
+                            <access>read-write</access>
+                        </field>
+                        <field>
+                            <name>Sound2EnableLeft</name>
+                            <description>Enable Sound 2 Master LEFT</description>
+                            <bitRange>[13:13]</bitRange>
+                            <access>read-write</access>
+                        </field>
+                        <field>
+                            <name>Sound3EnableLeft</name>
+                            <description>Enable Sound 3 Master LEFT</description>
+                            <bitRange>[14:14]</bitRange>
+                            <access>read-write</access>
+                        </field>
+                        <field>
+                            <name>Sound4EnableLeft</name>
+                            <description>Enable Sound 4 Master LEFT</description>
+                            <bitRange>[15:15]</bitRange>
+                            <access>read-write</access>
+                        </field>
+                    </fields>
+                </register>
+                <!-- SOUNDCNT_H -->
+                <register>
+                    <name>SOUNDCNT_H</name>
+                    <description>DMA Sound Control/Mixing</description>
+                    <addressOffset>0x22</addressOffset>
+                    <size>16</size>
+                    <access>read-write</access>
+                    <fields>
+                        <field>
+                            <name>SoundVolume</name>
+                            <description>Sound # 1-4 Volume</description>
+                            <bitRange>[1:0]</bitRange>
+                            <access>read-write</access>
+                            <enumeratedValues>
+                                <enumeratedValue>
+                                    <name>Quarter</name>
+                                    <value>0</value>
+                                </enumeratedValue>
+                                <enumeratedValue>
+                                    <name>Half</name>
+                                    <value>1</value>
+                                </enumeratedValue>
+                                <enumeratedValue>
+                                    <name>Full</name>
+                                    <value>2</value>
+                                </enumeratedValue>
+                                <enumeratedValue>
+                                    <name>Prohibited</name>
+                                    <value>3</value>
+                                </enumeratedValue>
+                            </enumeratedValues>
+                        </field>
+                        <field>
+                            <name>DMASoundAVolume</name>
+                            <description>DMA Sound A Volume</description>
+                            <bitRange>[2:2]</bitRange>
+                            <access>read-write</access>
+                            <enumeratedValues>
+                                <enumeratedValue>
+                                    <name>Half</name>
+                                    <value>0</value>
+                                </enumeratedValue>
+                                <enumeratedValue>
+                                    <name>Full</name>
+                                    <value>1</value>
+                                </enumeratedValue>
+                            </enumeratedValues>
+                        </field>
+                        <field derivedFrom="DMASoundAVolume">
+                            <name>DMASoundBVolume</name>
+                            <description>DMA Sound B Volume</description>
+                            <bitRange>[3:3]</bitRange>
+                        </field>
+                        <field>
+                            <name>DMASoundAEnableRight</name>
+                            <description>DMA Sound A Enable RIGHT</description>
+                            <bitRange>[8:8]</bitRange>
+                            <access>read-write</access>
+                            <enumeratedValues>
+                                <enumeratedValue>
+                                    <name>Disable</name>
+                                    <value>0</value>
+                                </enumeratedValue>
+                                <enumeratedValue>
+                                    <name>Enable</name>
+                                    <value>1</value>
+                                </enumeratedValue>
+                            </enumeratedValues>
+                        </field>
+                        <field derivedFrom="DMASoundAEnableRight">
+                            <name>DMASoundAEnableLeft</name>
+                            <description>DMA Sound A Enable LEFT</description>
+                            <bitRange>[9:9]</bitRange>
+                        </field>
+                        <field>
+                            <name>DMASoundATimer</name>
+                            <description>DMA Sound A Timer Select</description>
+                            <bitRange>[10:10]</bitRange>
+                            <access>read-write</access>
+                            <enumeratedValues>
+                                <enumeratedValue>
+                                    <name>Timer0</name>
+                                    <value>0</value>
+                                </enumeratedValue>
+                                <enumeratedValue>
+                                    <name>Timer1</name>
+                                    <value>1</value>
+                                </enumeratedValue>
+                            </enumeratedValues>
+                        </field>
+                        <field>
+                            <name>DMASoundAResetFIFO</name>
+                            <description>DMA Sound A Reset FIFO (1=Reset)</description>
+                            <bitRange>[11:11]</bitRange>
+                            <access>read-write</access>
+                        </field>
+                        <field derivedFrom="DMASoundAEnableRight">
+                            <name>DMASoundBEnableRight</name>
+                            <description>DMA Sound B Enable RIGHT</description>
+                            <bitRange>[12:12]</bitRange>
+                        </field>
+                        <field derivedFrom="DMASoundAEnableRight">
+                            <name>DMASoundBEnableLeft</name>
+                            <description>DMA Sound B Enable LEFT</description>
+                            <bitRange>[13:13]</bitRange>
+                        </field>
+                        <field derivedFrom="DMASoundAResetFIFO">
+                            <name>DMASoundBResetFIFO</name>
+                            <description>DMA Sound B Timer Select</description>
+                            <bitRange>[14:14]</bitRange>
+                        </field>
+                        <field derivedFrom="DMASoundATimer">
+                            <name>DMASoundBTimer</name>
+                            <description>DMA Sound B Reset FIFO (1=Reset)</description>
+                            <bitRange>[15:15]</bitRange>
+                        </field>
+                    </fields>
+                </register>
+                <!-- SOUNDCNT_X -->
+                <register>
+                    <name>SOUNDCNT_X</name>
+                    <description>Sound on/off</description>
+                    <addressOffset>0x24</addressOffset>
+                    <size>16</size>
+                    <access>read-write</access>
+                    <fields>
+                        <field>
+                            <name>Sound1ON</name>
+                            <description>Sound 1 ON flag</description>
+                            <bitRange>[0:0]</bitRange>
+                            <access>read-only</access>
+                        </field>
+                        <field>
+                            <name>Sound2ON</name>
+                            <description>Sound 2 ON flag</description>
+                            <bitRange>[1:1]</bitRange>
+                            <access>read-only</access>
+                        </field>
+                        <field>
+                            <name>Sound3ON</name>
+                            <description>Sound 3 ON flag</description>
+                            <bitRange>[2:2]</bitRange>
+                            <access>read-only</access>
+                        </field>
+                        <field>
+                            <name>Sound4ON</name>
+                            <description>Sound 4 ON flag</description>
+                            <bitRange>[3:3]</bitRange>
+                            <access>read-only</access>
+                        </field>
+                        <field>
+                            <name>MasterEnable</name>
+                            <description>PSG/FIFO Master Enable</description>
+                            <bitRange>[7:7]</bitRange>
+                            <access>read-write</access>
+                            <enumeratedValues>
+                                <enumeratedValue>
+                                    <name>Disable</name>
+                                    <value>0</value>
+                                </enumeratedValue>
+                                <enumeratedValue>
+                                    <name>Enable</name>
+                                    <value>1</value>
+                                </enumeratedValue>
+                            </enumeratedValues>
+                        </field>
+                    </fields>
+                </register>
+                <!-- SOUNDBIAS -->
+                <register>
+                    <name>SOUNDBIAS</name>
+                    <description>Sound PWM Control</description>
+                    <addressOffset>0x28</addressOffset>
+                    <size>16</size>
+                    <access>read-write</access>
+                    <fields>
+                        <field>
+                            <name>BiasLevel</name>
+                            <description>Bias Level (Default=200h, converting signed samples into unsigned)</description>
+                            <bitRange>[9:0]</bitRange>
+                            <access>read-write</access>
+                        </field>
+                        <field>
+                            <name>AmplitudeRes</name>
+                            <description>Amplitude Resolution/Sampling Cycle (Default=0)</description>
+                            <bitRange>[15:14]</bitRange>
+                            <access>read-write</access>
+                            <enumeratedValues>
+                                <enumeratedValue>
+                                    <name>Cycle0</name>
+                                    <description>9bit / 32.768kHz (Default, best for DMA channels A,B)</description>
+                                    <value>0</value>
+                                </enumeratedValue>
+                                <enumeratedValue>
+                                    <name>Cycle1</name>
+                                    <description>8bit / 65.536kHz</description>
+                                    <value>1</value>
+                                </enumeratedValue>
+                                <enumeratedValue>
+                                    <name>Cycle2</name>
+                                    <description>7bit / 131.072kHz</description>
+                                    <value>2</value>
+                                </enumeratedValue>
+                                <enumeratedValue>
+                                    <name>Cycle3</name>
+                                    <description>6bit / 262.144kHz (Best for PSG channels 1-4)</description>
+                                    <value>3</value>
+                                </enumeratedValue>
+                            </enumeratedValues>
+                        </field>
+                    </fields>
+                </register>
+                <!-- WAVE_RAM -->
+                <register>
+                    <dim>4</dim>
+                    <dimIncrement>4</dimIncrement>
+                    <dimIndex>0,1,2,3</dimIndex>
+                    <name>WAVE_RAM[%s]</name>
+                    <description>This area contains 16 bytes (32 x 4bits) Wave Pattern data which is output by channel 3.</description>
+                    <addressOffset>0x30</addressOffset>
+                    <size>32</size>
+                    <access>read-write</access>
+                </register>
+                <!-- FIFO_A -->
+                <register>
+                    <name>FIFO_A</name>
+                    <description>Sound A FIFO</description>
+                    <addressOffset>0x40</addressOffset>
+                    <size>32</size>
+                    <access>write-only</access>
+                    <fields>
+                        <field>
+                            <name>Data0</name>
+                            <bitRange>[7:0]</bitRange>
+                            <access>write-only</access>
+                        </field>
+                        <field>
+                            <name>Data1</name>
+                            <bitRange>[15:8]</bitRange>
+                            <access>write-only</access>
+                        </field>
+                        <field>
+                            <name>Data2</name>
+                            <bitRange>[23:16]</bitRange>
+                            <access>write-only</access>
+                        </field>
+                        <field>
+                            <name>Data3</name>
+                            <bitRange>[31:24]</bitRange>
+                            <access>write-only</access>
+                        </field>
+                    </fields>
+                </register>
+                <!-- FIFO_B -->
+                <register derivedFrom="FIFO_A">
+                    <name>FIFO_B</name>
+                    <description>Sound B FIFO</description>
+                    <addressOffset>0x44</addressOffset>
+                </register>
+            </registers>
+        </peripheral>
+        <!-- DMA Transfer Channels -->
+        <peripheral>
+            <name>DMA</name>
+            <description>DMA Transfer Channels</description>
+            <baseAddress>0x40000B0</baseAddress>
+            <registers>
+                <cluster>
+                    <dim>4</dim>
+                    <dimIncrement>4</dimIncrement>
+                    <dimIndex>0,1,2,3</dimIndex>
+                    <addressOffset>0x0</addressOffset>
+                    <register>
+                        <name>DMA[%s]SAD</name>
+                        <description>DMA [%s] Source Address</description>
+                        <addressOffset>0x0</addressOffset>
+                        <size>32</size>
+                        <access>write-only</access>
+                    </register>
+                    <register>
+                        <name>DMA[%s]DAD</name>
+                        <description>DMA [%s] Destination Address</description>
+                        <addressOffset>0x4</addressOffset>
+                        <size>32</size>
+                        <access>write-only</access>
+                    </register>
+                    <register>
+                        <name>DMA[%s]CNT</name>
+                        <description>DMA [%s] Control</description>
+                        <addressOffset>0x8</addressOffset>
+                        <size>32</size>
+                        <access>read-write</access>
+                        <fields>
+                            <field>
+                                <name>WordCount</name>
+                                <description>Specifies the number of data units to be transferred, each unit is 16bit or 32bit depending on the transfer type, a value of zero is treated as max length (ie. 4000h, or 10000h for DMA3).</description>
+                                <bitRange>[15:0]</bitRange>
+                                <access>write-only</access>
+                            </field>
+                            <field>
+                                <name>DestAddr</name>
+                                <description>Dest Address Control</description>
+                                <bitRange>[22:21]</bitRange>
+                                <access>read-write</access>
+                                <enumeratedValues>
+                                    <enumeratedValue>
+                                        <name>Increment</name>
+                                        <value>0</value>
+                                    </enumeratedValue>
+                                    <enumeratedValue>
+                                        <name>Decrement</name>
+                                        <value>1</value>
+                                    </enumeratedValue>
+                                    <enumeratedValue>
+                                        <name>Fixed</name>
+                                        <value>2</value>
+                                    </enumeratedValue>
+                                    <enumeratedValue>
+                                        <name>Increment_Reload</name>
+                                        <value>3</value>
+                                    </enumeratedValue>
+                                </enumeratedValues>
+                            </field>
+                            <field>
+                                <name>SrcAddr</name>
+                                <description>Source Address Control</description>
+                                <bitRange>[24:23]</bitRange>
+                                <access>read-write</access>
+                                <enumeratedValues>
+                                    <enumeratedValue>
+                                        <name>Increment</name>
+                                        <value>0</value>
+                                    </enumeratedValue>
+                                    <enumeratedValue>
+                                        <name>Decrement</name>
+                                        <value>1</value>
+                                    </enumeratedValue>
+                                    <enumeratedValue>
+                                        <name>Fixed</name>
+                                        <value>2</value>
+                                    </enumeratedValue>
+                                    <enumeratedValue>
+                                        <name>Prohibited</name>
+                                        <value>3</value>
+                                    </enumeratedValue>
+                                </enumeratedValues>
+                            </field>
+                            <field>
+                                <name>Repeat</name>
+                                <description>DMA Repeat, must be zero if GamePak DRQ enabled</description>
+                                <bitRange>[25:25]</bitRange>
+                                <access>read-write</access>
+                            </field>
+                            <field>
+                                <name>TransferType</name>
+                                <description>DMA Transfer Type</description>
+                                <bitRange>[26:26]</bitRange>
+                                <access>read-write</access>
+                            </field>
+                            <field>
+                                <name>GamePakDRQ</name>
+                                <description>DMA3 only</description>
+                                <bitRange>[27:27]</bitRange>
+                                <access>read-write</access>
+                            </field>
+                            <field>
+                                <name>StartTiming</name>
+                                <description>DMA Start Timing</description>
+                                <bitRange>[29:28]</bitRange>
+                                <access>read-write</access>
+                                <enumeratedValues>
+                                    <enumeratedValue>
+                                        <name>Immediately</name>
+                                        <value>0</value>
+                                    </enumeratedValue>
+                                    <enumeratedValue>
+                                        <name>VBlank</name>
+                                        <value>1</value>
+                                    </enumeratedValue>
+                                    <enumeratedValue>
+                                        <name>HBlank</name>
+                                        <value>2</value>
+                                    </enumeratedValue>
+                                    <enumeratedValue>
+                                        <name>Special</name>
+                                        <description>DMA0=Prohibited, DMA1/DMA2=Sound FIFO, DMA3=Video Capture</description>
+                                        <value>3</value>
+                                    </enumeratedValue>
+                                </enumeratedValues>
+                            </field>
+                            <field>
+                                <name>IRQAtEnd</name>
+                                <description>IRQ upon end of Word Count</description>
+                                <bitRange>[30:30]</bitRange>
+                                <access>read-write</access>
+                            </field>
+                            <field>
+                                <name>Enable</name>
+                                <description>DMA Enable, after changing the Enable bit from 0 to 1, wait 2 clock cycles before accessing any DMA related registers.</description>
+                                <bitRange>[31:31]</bitRange>
+                                <access>read-write</access>
+                            </field>
+                        </fields>
+                    </register>
+                </cluster>
+            </registers>
+        </peripheral>
+        <!-- Timers -->
+        <peripheral>
+            <name>Timer</name>
+            <description>Timers registers</description>
+            <baseAddress>0x4000100</baseAddress>
+            <registers>
+                <register>
+                    <dim>4</dim>
+                    <dimIncrement>4</dimIncrement>
+                    <dimIndex>0,1,2,3</dimIndex>
+                    <name>TM[%s]CNT</name>
+                    <addressOffset>0x0</addressOffset>
+                    <size>32</size>
+                    <access>read-write</access>
+                    <fields>
+                        <field>
+                            <name>Value</name>
+                            <description>Timer Counter/Reload</description>
+                            <bitRange>[15:0]</bitRange>
+                            <access>read-write</access>
+                        </field>
+                        <field>
+                            <name>PrescalerSelec</name>
+                            <description>Prescaler Selection</description>
+                            <bitRange>[17:16]</bitRange>
+                            <access>read-write</access>
+                            <enumeratedValues>
+                                <enumeratedValue>
+                                    <name>F1</name>
+                                    <value>0</value>
+                                </enumeratedValue>
+                                <enumeratedValue>
+                                    <name>F64</name>
+                                    <value>1</value>
+                                </enumeratedValue>
+                                <enumeratedValue>
+                                    <name>F256</name>
+                                    <value>2</value>
+                                </enumeratedValue>
+                                <enumeratedValue>
+                                    <name>F1024</name>
+                                    <value>3</value>
+                                </enumeratedValue>
+                            </enumeratedValues>
+                        </field>
+                        <field>
+                            <name>CountUpTiming</name>
+                            <description>When Count-up Timing is enabled, the prescaler value is ignored, instead the time is incremented each time when the previous counter overflows. This function cannot be used for Timer 0 (as it is the first timer). </description>
+                            <bitRange>[18:18]</bitRange>
+                            <access>read-write</access>
+                        </field>
+                        <field>
+                            <name>IRQEnable</name>
+                            <description>If set to 1, IRQ on Timer overflow</description>
+                            <bitRange>[22:22]</bitRange>
+                            <access>read-write</access>
+                        </field>
+                        <field>
+                            <name>Enable</name>
+                            <description>Timer Start/Stop (0=Stop, 1=Operate)</description>
+                            <bitRange>[23:23]</bitRange>
+                            <access>read-write</access>
+                        </field>
+                    </fields>
+                </register>
+            </registers>
+        </peripheral>
+        <!-- Serial Communication -->
+        <peripheral>
+            <name>SerialComm</name>
+            <description>Serial Communication</description>
+            <baseAddress>0x4000120</baseAddress>
+            <registers>
+                <!-- Array SIOMULTI[%s] 0 => 3-->
+                <!-- SIODATA32 -->
+                <register>
+                    <name>SIODATA32</name>
+                    <description>32bit normal transfer, outgoing data should be written to this register before starting the transfer. During transfer, transmitted bits are shifted-out (MSB first), and received bits are shifted-in simultaneously. Upon transfer completion, the register contains the received 8bit value.</description>
+                    <addressOffset>0x0</addressOffset>
+                    <size>32</size>
+                    <alternateRegister>SIOMULTI0</alternateRegister>
+                    <access>read-write</access>
+                </register>
+                <!-- SIOCNT -->
+                <!-- SIOMLT_SEND -->
+                <register>
+                    <name>SIOMLT_SEND</name>
+                    <description>Outgoing data (16 bit) which is to be sent to the other GBAs.</description>
+                    <addressOffset>0xA</addressOffset>
+                    <size>16</size>
+                    <access>read-write</access>
+                </register>
+                <!-- SIODATA8 -->
+                <register>
+                    <name>SIODATA8</name>
+                    <description>For 8bit normal mode. outgoing data should be written to this register before starting the transfer. During transfer, transmitted bits are shifted-out (MSB first), and received bits are shifted-in simultaneously. Upon transfer completion, the register contains the received 8bit value.</description>
+                    <addressOffset>0xA</addressOffset>
+                    <size>16</size>
+                    <alternateRegister>SIOMLT_SEND</alternateRegister>
+                    <access>read-write</access>
+                </register>
+                <!-- RCNT -->
+                <register>
+                    <name>RCNT</name>
+                    <description>Mode Selection, in Normal/Multiplayer/UART modes</description>
+                    <addressOffset>0x14</addressOffset>
+                    <size>16</size>
+                    <access>read-write</access>
+                    <fields>
+                        <field>
+                            <name>JOYBUS</name>
+                            <description>Must be 1 for JOYBUS Mode with MustBeZero to 1 too</description>
+                            <bitRange>[14:14]</bitRange>
+                            <access>read-write</access>
+                        </field>
+                        <field>
+                            <name>MustBeZero</name>
+                            <description>Must be zero (0) for Normal/Multiplayer/UART modes or 1 for JOYBUS Mode</description>
+                            <bitRange>[15:15]</bitRange>
+                            <access>read-write</access>
+                        </field>
+                    </fields>
+                </register>
+                <!-- JOYCNT -->
+                <!-- JOY_RECV -->
+                <!-- JOY_TRANS -->
+                <!-- JOYSTAT -->
+            </registers>
+        </peripheral>
+        <!-- Keypad Input -->
+        <peripheral>
+            <name>Inputs</name>
+            <description>Keypad Input</description>
+            <baseAddress>0x4000130</baseAddress>
+            <registers>
+                <!-- KEYINPUT -->
+                <register>
+                    <name>KEYINPUT</name>
+                    <description>Key Status</description>
+                    <addressOffset>0x0</addressOffset>
+                    <size>16</size>
+                    <access>read-only</access>
+                    <fields>
+                        <field>
+                            <name>A</name>
+                            <description>Button A</description>
+                            <bitRange>[0:0]</bitRange>
+                            <access>read-only</access>
+                            <enumeratedValues>
+                                <enumeratedValue>
+                                    <name>Pressed</name>
+                                    <value>0</value>
+                                </enumeratedValue>
+                                <enumeratedValue>
+                                    <name>Released</name>
+                                    <value>1</value>
+                                </enumeratedValue>
+                            </enumeratedValues>
+                        </field>
+                        <field derivedFrom="A">
+                            <name>B</name>
+                            <description>Button B</description>
+                            <bitRange>[1:1]</bitRange>
+                        </field>
+                        <field derivedFrom="A">
+                            <name>Select</name>
+                            <description>Button Select</description>
+                            <bitRange>[2:2]</bitRange>
+                        </field>
+                        <field derivedFrom="A">
+                            <name>Start</name>
+                            <description>Button Start</description>
+                            <bitRange>[3:3]</bitRange>
+                        </field>
+                        <field derivedFrom="A">
+                            <name>Right</name>
+                            <description>Button Right</description>
+                            <bitRange>[4:4]</bitRange>
+                        </field>
+                        <field derivedFrom="A">
+                            <name>Left</name>
+                            <description>Button Left</description>
+                            <bitRange>[5:5]</bitRange>
+                        </field>
+                        <field derivedFrom="A">
+                            <name>Up</name>
+                            <description>Button Up</description>
+                            <bitRange>[6:6]</bitRange>
+                        </field>
+                        <field derivedFrom="A">
+                            <name>Down</name>
+                            <description>Button Down</description>
+                            <bitRange>[7:7]</bitRange>
+                        </field>
+                        <field derivedFrom="A">
+                            <name>R</name>
+                            <description>Button R</description>
+                            <bitRange>[8:8]</bitRange>
+                        </field>
+                        <field derivedFrom="A">
+                            <name>L</name>
+                            <description>Button L</description>
+                            <bitRange>[9:9]</bitRange>
+                        </field>
+                    </fields>
+                </register>
+                <!-- KEYCNT -->
+                <register>
+                    <name>KEYCNT</name>
+                    <description>Key Interrupt Control</description>
+                    <addressOffset>0x2</addressOffset>
+                    <size>16</size>
+                    <access>read-write</access>
+                    <fields>
+                        <field>
+                            <name>A</name>
+                            <description>Button A</description>
+                            <bitRange>[0:0]</bitRange>
+                            <access>read-write</access>
+                            <enumeratedValues>
+                                <enumeratedValue>
+                                    <name>Ignore</name>
+                                    <value>0</value>
+                                </enumeratedValue>
+                                <enumeratedValue>
+                                    <name>Select</name>
+                                    <value>1</value>
+                                </enumeratedValue>
+                            </enumeratedValues>
+                        </field>
+                        <field derivedFrom="A">
+                            <name>B</name>
+                            <description>Button B</description>
+                            <bitRange>[1:1]</bitRange>
+                        </field>
+                        <field derivedFrom="A">
+                            <name>Select</name>
+                            <description>Button Select</description>
+                            <bitRange>[2:2]</bitRange>
+                        </field>
+                        <field derivedFrom="A">
+                            <name>Start</name>
+                            <description>Button Start</description>
+                            <bitRange>[3:3]</bitRange>
+                        </field>
+                        <field derivedFrom="A">
+                            <name>Right</name>
+                            <description>Button Right</description>
+                            <bitRange>[4:4]</bitRange>
+                        </field>
+                        <field derivedFrom="A">
+                            <name>Left</name>
+                            <description>Button Left</description>
+                            <bitRange>[5:5]</bitRange>
+                        </field>
+                        <field derivedFrom="A">
+                            <name>Up</name>
+                            <description>Button Up</description>
+                            <bitRange>[6:6]</bitRange>
+                        </field>
+                        <field derivedFrom="A">
+                            <name>Down</name>
+                            <description>Button Down</description>
+                            <bitRange>[7:7]</bitRange>
+                        </field>
+                        <field derivedFrom="A">
+                            <name>R</name>
+                            <description>Button R</description>
+                            <bitRange>[8:8]</bitRange>
+                        </field>
+                        <field derivedFrom="A">
+                            <name>L</name>
+                            <description>Button L</description>
+                            <bitRange>[9:9]</bitRange>
+                        </field>
+                        <field>
+                            <name>IRQEnable</name>
+                            <description>IRQ Enable Flag</description>
+                            <bitRange>[14:14]</bitRange>
+                            <access>read-write</access>
+                            <enumeratedValues>
+                                <enumeratedValue>
+                                    <name>Disable</name>
+                                    <value>0</value>
+                                </enumeratedValue>
+                                <enumeratedValue>
+                                    <name>Enable</name>
+                                    <value>1</value>
+                                </enumeratedValue>
+                            </enumeratedValues>
+                        </field>
+                        <field>
+                            <name>IRQCond</name>
+                            <description>IRQ Condition</description>
+                            <bitRange>[15:15]</bitRange>
+                            <access>read-write</access>
+                            <enumeratedValues>
+                                <enumeratedValue>
+                                    <name>LogicalOR</name>
+                                    <value>0</value>
+                                </enumeratedValue>
+                                <enumeratedValue>
+                                    <name>LogicalAND</name>
+                                    <value>1</value>
+                                </enumeratedValue>
+                            </enumeratedValues>
+                        </field>
+                    </fields>
+                </register>
+            </registers>
+        </peripheral>
+        <!-- Interrupt, Waitstate, and Power-Down Control -->
+        <peripheral>
+            <name>Interrupt</name>
+            <description>Interrupt, Waitstate, and Power-Down Control</description>
+            <baseAddress>0x4000200</baseAddress>
+            <registers>
+                <!-- IE -->
+                <register>
+                    <name>IE</name>
+                    <description>Interrupt Enable Register</description>
+                    <addressOffset>0x0</addressOffset>
+                    <size>16</size>
+                    <access>read-write</access>
+                    <fields>
+                        <field>
+                            <name>VBlank</name>
+                            <bitRange>[0:0]</bitRange>
+                            <access>read-write</access>
+                        </field>
+                        <field>
+                            <name>HBlank</name>
+                            <bitRange>[1:1]</bitRange>
+                            <access>read-write</access>
+                        </field>
+                        <field>
+                            <name>VCounter</name>
+                            <bitRange>[2:2]</bitRange>
+                            <access>read-write</access>
+                        </field>
+                        <field>
+                            <name>Timer0</name>
+                            <bitRange>[3:3]</bitRange>
+                            <access>read-write</access>
+                        </field>
+                        <field>
+                            <name>Timer1</name>
+                            <bitRange>[4:4]</bitRange>
+                            <access>read-write</access>
+                        </field>
+                        <field>
+                            <name>Timer2</name>
+                            <bitRange>[5:5]</bitRange>
+                            <access>read-write</access>
+                        </field>
+                        <field>
+                            <name>Timer3</name>
+                            <bitRange>[6:6]</bitRange>
+                            <access>read-write</access>
+                        </field>
+                        <field>
+                            <name>SerialCommunication</name>
+                            <bitRange>[7:7]</bitRange>
+                            <access>read-write</access>
+                        </field>
+                        <field>
+                            <name>DMA0</name>
+                            <bitRange>[8:8]</bitRange>
+                            <access>read-write</access>
+                        </field>
+                        <field>
+                            <name>DMA1</name>
+                            <bitRange>[9:9]</bitRange>
+                            <access>read-write</access>
+                        </field>
+                        <field>
+                            <name>DMA2</name>
+                            <bitRange>[10:10]</bitRange>
+                            <access>read-write</access>
+                        </field>
+                        <field>
+                            <name>DMA3</name>
+                            <bitRange>[11:11]</bitRange>
+                            <access>read-write</access>
+                        </field>
+                        <field>
+                            <name>Keypad</name>
+                            <bitRange>[12:12]</bitRange>
+                            <access>read-write</access>
+                        </field>
+                        <field>
+                            <name>GamePak</name>
+                            <bitRange>[13:13]</bitRange>
+                            <access>read-write</access>
+                        </field>
+                    </fields>
+                </register>
+                <!-- IF -->
+                <register derivedFrom="IE">
+                    <name>IF</name>
+                    <description>Interrupt Request Flags / IRQ Acknowledge</description>
+                    <addressOffset>0x2</addressOffset>
+                </register>
+                <!-- WAITCNT -->
+                <register>
+                    <name>WAITCNT</name>
+                    <description>Waitstate Control</description>
+                    <addressOffset>0x4</addressOffset>
+                    <size>16</size>
+                    <access>read-write</access>
+                    <fields>
+                        <field>
+                            <name>SRAMWaitControl</name>
+                            <description>SRAM Wait Control (0..3 = 4,3,2,8 cycles)</description>
+                            <bitRange>[1:0]</bitRange>
+                            <access>read-write</access>
+                        </field>
+                        <field>
+                            <name>WaitState0First</name>
+                            <description>SWait State 0 First Access (0..3 = 4,3,2,8 cycles)</description>
+                            <bitRange>[3:2]</bitRange>
+                            <access>read-write</access>
+                        </field>
+                        <field>
+                            <name>WaitState0Second</name>
+                            <description>Wait State 0 Second Access (0..1 = 2,1 cycles)</description>
+                            <bitRange>[4:4]</bitRange>
+                            <access>read-write</access>
+                        </field>
+                        <field>
+                            <name>WaitState1First</name>
+                            <description>Wait State 1 First Access  (0..3 = 4,3,2,8 cycles)</description>
+                            <bitRange>[6:5]</bitRange>
+                            <access>read-write</access>
+                        </field>
+                        <field>
+                            <name>WaitState1Second</name>
+                            <description>Wait State 1 Second Access (0..1 = 4,1 cycles; unlike above WS0)</description>
+                            <bitRange>[7:7]</bitRange>
+                            <access>read-write</access>
+                        </field>
+                        <field>
+                            <name>WaitState2First</name>
+                            <description>Wait State 2 First Access  (0..3 = 4,3,2,8 cycles)</description>
+                            <bitRange>[9:8]</bitRange>
+                            <access>read-write</access>
+                        </field>
+                        <field>
+                            <name>WaitState2Second</name>
+                            <description>Wait State 2 Second Access (0..1 = 8,1 cycles; unlike above WS0,WS1)</description>
+                            <bitRange>[10:10]</bitRange>
+                        </field>
+                        <field>
+                            <name>PhiTerminalOutput</name>
+                            <description>PHI Terminal Output (0..3 = Disable, 4.19MHz, 8.38MHz, 16.78MHz)</description>
+                            <bitRange>[12:11]</bitRange>
+                            <access>read-write</access>
+                        </field>
+                        <field>
+                            <name>PrefetchBuffer</name>
+                            <description>Game Pak Prefetch Buffer (Pipe)</description>
+                            <bitRange>[14:14]</bitRange>
+                            <access>read-write</access>
+                        </field>
+                        <field>
+                            <name>TypeFlag</name>
+                            <description>Game Pak Type Flag</description>
+                            <bitRange>[15:15]</bitRange>
+                            <access>read-only</access>
+                            <enumeratedValues>
+                                <enumeratedValue>
+                                    <name>GBA</name>
+                                    <value>0</value>
+                                </enumeratedValue>
+                                <enumeratedValue>
+                                    <name>CGB</name>
+                                    <value>1</value>
+                                </enumeratedValue>
+                            </enumeratedValues>
+                        </field>
+                    </fields>
+                </register>
+                <!-- IME -->
+                <register>
+                    <name>IME</name>
+                    <description>Interrupt Master Enable</description>
+                    <addressOffset>0x8</addressOffset>
+                    <size>16</size>
+                    <access>read-write</access>
+                    <fields>
+                        <field>
+                            <name>MasterFlag</name>
+                            <description>If set triggers Interrupts in IE Registers</description>
+                            <bitRange>[0:0]</bitRange>
+                            <access>read-write</access>
+                        </field>
+                    </fields>
+                </register>
+            </registers>
+        </peripheral>
+    </peripherals>
+</device>    
