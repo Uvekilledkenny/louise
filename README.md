@@ -5,14 +5,13 @@
 This crate is a low level library for the GBA.
 
 ## TODOs :
-- SVD to Create for GBA
-- Check and Improve SVD File
-- Custom SVD Parser 
-- Bios Functions
-- Interrupt Handler
-- Some other Structs (OAM, ScreenBlocks, usw.) 
-- CRT0 in Rust maybe ?
-
+- [x] SVD to Create for GBA
+- [ ] Check and Improve SVD File
+- [ ] Custom SVD Parser 
+- [ ] Bios Functions
+- [ ] Interrupt Handler
+- [ ] Some other Structs (OAM, ScreenBlocks, Serial Communications, usw.) 
+- [ ] CRT0 in Rust maybe ?
 
 ## Docs for me :
 - http://www.keil.com/pack/doc/CMSIS/SVD/html/index.html

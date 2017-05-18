@@ -1873,68 +1873,6 @@
                 </register>
             </registers>
         </peripheral>
-        <!-- Serial Communication -->
-        <peripheral>
-            <name>SerialComm</name>
-            <description>Serial Communication</description>
-            <baseAddress>0x4000120</baseAddress>
-            <registers>
-                <!-- Array SIOMULTI[%s] 0 => 3-->
-                <!-- SIODATA32 -->
-                <register>
-                    <name>SIODATA32</name>
-                    <description>32bit normal transfer, outgoing data should be written to this register before starting the transfer. During transfer, transmitted bits are shifted-out (MSB first), and received bits are shifted-in simultaneously. Upon transfer completion, the register contains the received 8bit value.</description>
-                    <addressOffset>0x0</addressOffset>
-                    <size>32</size>
-                    <alternateRegister>SIOMULTI0</alternateRegister>
-                    <access>read-write</access>
-                </register>
-                <!-- SIOCNT -->
-                <!-- SIOMLT_SEND -->
-                <register>
-                    <name>SIOMLT_SEND</name>
-                    <description>Outgoing data (16 bit) which is to be sent to the other GBAs.</description>
-                    <addressOffset>0xA</addressOffset>
-                    <size>16</size>
-                    <access>read-write</access>
-                </register>
-                <!-- SIODATA8 -->
-                <register>
-                    <name>SIODATA8</name>
-                    <description>For 8bit normal mode. outgoing data should be written to this register before starting the transfer. During transfer, transmitted bits are shifted-out (MSB first), and received bits are shifted-in simultaneously. Upon transfer completion, the register contains the received 8bit value.</description>
-                    <addressOffset>0xA</addressOffset>
-                    <size>16</size>
-                    <alternateRegister>SIOMLT_SEND</alternateRegister>
-                    <access>read-write</access>
-                </register>
-                <!-- RCNT -->
-                <register>
-                    <name>RCNT</name>
-                    <description>Mode Selection, in Normal/Multiplayer/UART modes</description>
-                    <addressOffset>0x14</addressOffset>
-                    <size>16</size>
-                    <access>read-write</access>
-                    <fields>
-                        <field>
-                            <name>JOYBUS</name>
-                            <description>Must be 1 for JOYBUS Mode with MustBeZero to 1 too</description>
-                            <bitRange>[14:14]</bitRange>
-                            <access>read-write</access>
-                        </field>
-                        <field>
-                            <name>MustBeZero</name>
-                            <description>Must be zero (0) for Normal/Multiplayer/UART modes or 1 for JOYBUS Mode</description>
-                            <bitRange>[15:15]</bitRange>
-                            <access>read-write</access>
-                        </field>
-                    </fields>
-                </register>
-                <!-- JOYCNT -->
-                <!-- JOY_RECV -->
-                <!-- JOY_TRANS -->
-                <!-- JOYSTAT -->
-            </registers>
-        </peripheral>
         <!-- Keypad Input -->
         <peripheral>
             <name>Inputs</name>
